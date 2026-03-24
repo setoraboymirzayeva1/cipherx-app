@@ -12,6 +12,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - run: npm install -g @capacitor/cli
       - run: npm install
       - run: npx cap add android
       - run: npx cap sync
