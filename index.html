@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CipherX - Shifrlash Ilovasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0f0f13;
+  --surface: #1a1a24;
+  --surface2: #22222f;
+  --border: #2e2e3e;
+  --accent: #7c6af7;
+  --accent2: #4fd1c5;
+  --text: #e8e8f0;
+  --muted: #6b6b80;
+  --success: #4fd1c5;
+  --danger: #f06292;
+  --radius: 14px;
+}
+.theme-blue {
+  --bg: #050d1a;
+  --surface: #0a1628;
+  --surface2: #0e1f38;
+  --border: #1a3055;
+  --accent: #3b9eff;
+  --accent2: #00e5c0;
+  --text: #e0efff;
+  --muted: #4a6080;
+}
+.theme-green {
+  --bg: #080f0a;
+  --surface: #0e1f12;
+  --surface2: #122918;
+  --border: #1e4028;
+  --accent: #4caf7d;
+  --accent2: #a8ff78;
+  --text: #e0ffe8;
+  --muted: #3a6048;
+}
+.theme-rose {
+  --bg: #130a10;
+  --surface: #201018;
+  --surface2: #2a1420;
+  --border: #3d1a2e;
+  --accent: #e05c8a;
+  --accent2: #ffa07a;
+  --text: #ffe8f0;
+  --muted: #6b3050;
+}
+.theme-light {
+  --bg: #f0f0f8;
+  --surface: #ffffff;
+  --surface2: #f5f5fc;
+  --border: #ddddf0;
+  --accent: #6c5ce7;
+  --accent2: #00b894;
+  --text: #1a1a2e;
+  --muted: #8888aa;
+  --success: #00b894;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Layout */
+.app { display: flex; flex-direction: column; min-height: 100vh; }
+
+/* Header */
+header {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.logo span { color: var(--accent); }
+
+/* Theme picker */
+.themes {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.theme-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.theme-dot:hover { transform: scale(1.2); }
+.theme-dot.active { border-color: var(--text); transform: scale(1.15); }
+.td-dark  { background: linear-gradient(135deg, #7c6af7, #4fd1c5); }
+.td-blue  { background: linear-gradient(135deg, #3b9eff, #00e5c0); }
+.td-green { background: linear-gradient(135deg, #4caf7d, #a8ff78); }
+.td-rose  { background: linear-gradient(135deg, #e05c8a, #ffa07a); }
+.td-light { background: linear-gradient(135deg, #6c5ce7, #fff); border: 1px solid #ccc; }
+
+/* Nav tabs */
+nav {
+  display: flex;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  gap: 4px;
+}
+.nav-tab {
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Pages */
+.page { display: none; padding: 20px; max-width: 540px; margin: 0 auto; width: 100%; }
+.page.active { display: block; }
+
+/* Card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: background 0.3s;
+}
+.card-head {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* Method selector */
+.method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.method-btn {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--muted);
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.method-btn .m-name { font-size: 13px; color: var(--text); display: block; margin-bottom: 2px; }
+.method-btn .m-desc { font-size: 10px; }
+.method-btn.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface2));
+  color: var(--accent);
+}
+.method-btn.active .m-name { color: var(--accent); }
+
+/* Input */
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+input, textarea {
+  width: 100%;
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus, textarea:focus { border-color: var(--accent); }
+textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+/* Key hint */
+.key-hint {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
+  font-family: 'DM Mono', monospace;
+}
+.key-hint span { color: var(--accent2); }
+
+/* Action button */
+.action-btn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+}
+.btn-encrypt {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-encrypt:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 40%, transparent); }
+.btn-decrypt {
+  background: var(--surface2);
+  color: var(--accent2);
+  border: 1.5px solid var(--accent2);
+}
+.btn-decrypt:hover { background: color-mix(in srgb, var(--accent2) 12%, var(--surface2)); transform: translateY(-1px); }
+.action-btn:active { transform: translateY(0); }
+
+/* Result */
+.result-area {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--accent2);
+  word-break: break-all;
+  line-height: 1.7;
+  min-height: 48px;
+  display: none;
+  margin-bottom: 10px;
+}
+.result-area.show { display: block; }
+
+.copy-btn {
+  width: 100%;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: none;
+}
+.copy-btn.show { display: block; }
+.copy-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+
+/* Error */
+.err {
+  font-size: 12px;
+  color: var(--danger);
+  margin-top: 6px;
+  display: none;
+  font-family: 'DM Mono', monospace;
+}
+.err.show { display: block; }
+
+/* History page */
+.hist-empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.hist-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.hist-item:hover { border-color: var(--accent); }
+.hist-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.hist-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+.badge-enc { background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent); }
+.badge-dec { background: color-mix(in srgb, var(--accent2) 20%, transparent); color: var(--accent2); }
+.hist-time { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+.hist-method { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.hist-preview {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.7;
+}
+.hist-clear {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1.5px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+.hist-clear:hover { background: color-mix(in srgb, var(--danger) 15%, transparent); }
+
+/* Caesar shift */
+.shift-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.shift-row label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+input[type=range] {
+  flex: 1;
+  height: 4px;
+  accent-color: var(--accent);
+  background: var(--border);
+  border: none;
+  border-radius: 2px;
+  padding: 0;
+}
+.shift-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  width: 32px;
+  text-align: center;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  padding: 12px 22px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.3s;
+  z-index: 999;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* About page */
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.about-title { font-size: 15px; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+.about-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.about-text b { color: var(--text); }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
+/* Page title */
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+.page-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <div class="logo">Cipher<span>X</span></div>
+  <div class="themes">
+    <div class="theme-dot td-dark active" onclick="setTheme('', this)" title="Qorongʻi"></div>
+    <div class="theme-dot td-blue"  onclick="setTheme('theme-blue', this)" title="Koʻk"></div>
+    <div class="theme-dot td-green" onclick="setTheme('theme-green', this)" title="Yashil"></div>
+    <div class="theme-dot td-rose"  onclick="setTheme('theme-rose', this)" title="Qizil"></div>
+    <div class="theme-dot td-light" onclick="setTheme('theme-light', this)" title="Kunduzgi"></div>
+  </div>
+</header>
+
+<nav>
+  <button class="nav-tab active" onclick="showPage('encrypt', this)">Shifrlash</button>
+  <button class="nav-tab" onclick="showPage('decrypt', this)">Ochish</button>
+  <button class="nav-tab" onclick="showPage('history', this)">Tarix</button>
+  <button class="nav-tab" onclick="showPage('about', this)">Haqida</button>
+</nav>
+
+<!-- SHIFRLASH -->
+<div class="page active" id="page-encrypt">
+  <div class="page-title">Shifrlash</div>
+  <p class="page-sub">Matnni tanlangan usul bilan shifrlang</p>
+
+  <div class="card">
+    <div class="card-head">Shifrlash usuli</div>
+    <div class="method-grid">
+      <button class="method-btn active" onclick="setMethod('gamma', this)">
+        <span class="m-name">Gamma (XOR)</span>
+        <span class="m-desc">Kalit bilan XOR</span>
+      </button>
+      <button class="method-btn" onclick="setMethod('caesar', this)">
+        <span class="m-name">Sezar</span>
+        <span class="m-desc">Harflarni siljitish</span>
+      </button>
+      <button class="method-btn" onclick="setMethod('base64', this)">
+        <span class="m-name">Base64</span>
+        <span class="m-desc">Kodlash (kalit shart emas)</span>
+      </button>
+      <button class="method-btn" onclick="setMethod('reverse', this)">
+        <span class="m-name">Teskari</span>
+        <span class="m-desc">Matnni teskari yozish</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card" id="enc-gamma-opts">
+    <div class="card-head">Kalit</div>
+    <div class="field">
+      <input type="text" id="encKey" placeholder="Kalit sozini kiriting..." value="KALIT"/>
+    </div>
+    <div class="key-hint">Kalit uzunligi: <span id="keyLenEnc">5</span> belgi</div>
+  </div>
+
+  <div class="card" id="enc-caesar-opts" style="display:none">
+    <div class="card-head">Siljish miqdori</div>
+    <div class="shift-row">
+      <label>Shift</label>
+      <input type="range" id="encShift" min="1" max="25" value="3" oninput="document.getElementById('encShiftVal').textContent=this.value"/>
+      <div class="shift-val" id="encShiftVal">3</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Matn</div>
+    <div class="field">
+      <textarea id="encInput" placeholder="Bu yerga matn yozing..."></textarea>
+    </div>
+    <button class="action-btn btn-encrypt" onclick="doEncrypt()">Shifrlash</button>
+    <div class="err" id="encErr">Iltimos, matn kiriting!</div>
+    <div class="result-area" id="encResult"></div>
+    <button class="copy-btn" id="encCopyBtn" onclick="copyText('encResult', this)">Nusxa olish</button>
+  </div>
+</div>
+
+<!-- OCHISH -->
+<div class="page" id="page-decrypt">
+  <div class="page-title">Ochish</div>
+  <p class="page-sub">Shifrlangan matnni qaytaring</p>
+
+  <div class="card">
+    <div class="card-head">Shifrlash usuli</div>
+    <div class="method-grid">
+      <button class="method-btn active" onclick="setMethodDec('gamma', this)">
+        <span class="m-name">Gamma (XOR)</span>
+        <span class="m-desc">Kalit bilan XOR</span>
+      </button>
+      <button class="method-btn" onclick="setMethodDec('caesar', this)">
+        <span class="m-name">Sezar</span>
+        <span class="m-desc">Harflarni siljitish</span>
+      </button>
+      <button class="method-btn" onclick="setMethodDec('base64', this)">
+        <span class="m-name">Base64</span>
+        <span class="m-desc">Kodini ochish</span>
+      </button>
+      <button class="method-btn" onclick="setMethodDec('reverse', this)">
+        <span class="m-name">Teskari</span>
+        <span class="m-desc">Matnni teskari yozish</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card" id="dec-gamma-opts">
+    <div class="card-head">Kalit</div>
+    <div class="field">
+      <input type="text" id="decKey" placeholder="Xuddi shu kalitni kiriting..." value="KALIT"/>
+    </div>
+  </div>
+
+  <div class="card" id="dec-caesar-opts" style="display:none">
+    <div class="card-head">Siljish miqdori</div>
+    <div class="shift-row">
+      <label>Shift</label>
+      <input type="range" id="decShift" min="1" max="25" value="3" oninput="document.getElementById('decShiftVal').textContent=this.value"/>
+      <div class="shift-val" id="decShiftVal">3</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Shifrlangan matn</div>
+    <div class="field">
+      <textarea id="decInput" placeholder="Shifrlangan matnni bu yerga yozing..."></textarea>
+    </div>
+    <button class="action-btn btn-decrypt" onclick="doDecrypt()">Ochish</button>
+    <div class="err" id="decErr">Noto'gri format yoki kalit!</div>
+    <div class="result-area" id="decResult" style="color:var(--accent);"></div>
+    <button class="copy-btn" id="decCopyBtn" onclick="copyText('decResult', this)">Nusxa olish</button>
+  </div>
+</div>
+
+<!-- TARIX -->
+<div class="page" id="page-history">
+  <div class="page-title">Tarix</div>
+  <p class="page-sub">Oxirgi shifrlash amallari</p>
+  <div id="histList"></div>
+  <button class="hist-clear" onclick="clearHistory()" style="display:none" id="histClearBtn">Tarixni tozalash</button>
+</div>
+
+<!-- HAQIDA -->
+<div class="page" id="page-about">
+  <div class="page-title">Haqida</div>
+  <p class="page-sub">CipherX shifrlash ilovasi</p>
+
+  <div class="about-card">
+    <div class="about-title">Gamma (XOR) shifrlash</div>
+    <div class="about-text">
+      Har bir belgi raqami kalit belgisi raqami bilan <b>XOR</b> (eksklyuziv OR) amalida birlashtiriladi. Natija HEX formatda chiqadi. Xuddi shu kalit bilan qayta XOR qilsangiz asl matn qaytadi.
+    </div>
+    <div class="tag-row"><span class="tag">XOR</span><span class="tag">Simmetrik</span><span class="tag">Kalit kerak</span></div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-title">Sezar shifrlash</div>
+    <div class="about-text">
+      Har bir harf alifboda <b>N ta</b> oldinga siljitiladi. Masalan: shift=3 da "A" → "D" bo'ladi. Oddiy lekin tarixiy shifrlash usuli.
+    </div>
+    <div class="tag-row"><span class="tag">Siljish</span><span class="tag">Lotin/Kirill</span></div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-title">Base64</div>
+    <div class="about-text">
+      Matnni <b>64 ta belgi</b> asosida kodlaydi. Shifrlash emas, kodlash — kalit shart emas. Ko'pincha ma'lumot uzatishda ishlatiladi.
+    </div>
+    <div class="tag-row"><span class="tag">Kodlash</span><span class="tag">Kalitsiz</span></div>
+  </div>
+
+  <div class="about-card">
+    <div class="about-title">Teskari yozish</div>
+    <div class="about-text">
+      Matnni <b>teskari tartibda</b> yozadi. Eng oddiy shifrlash usuli. Ochish uchun ham xuddi shu amal qilinadi.
+    </div>
+    <div class="tag-row"><span class="tag">Oddiy</span><span class="tag">Tezkor</span></div>
+  </div>
+</div>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// State
+let encMethod = 'gamma';
+let decMethod = 'gamma';
+let history = JSON.parse(localStorage.getItem('cipherx_history') || '[]');
+
+// Theme
+function setTheme(cls, dot) {
+  document.body.className = cls;
+  document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+  dot.classList.add('active');
+}
+
+// Nav
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'history') renderHistory();
+}
+
+// Method
+function setMethod(m, btn) {
+  encMethod = m;
+  document.querySelectorAll('#page-encrypt .method-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('enc-gamma-opts').style.display = m === 'gamma' ? 'block' : 'none';
+  document.getElementById('enc-caesar-opts').style.display = m === 'caesar' ? 'block' : 'none';
+}
+function setMethodDec(m, btn) {
+  decMethod = m;
+  document.querySelectorAll('#page-decrypt .method-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('dec-gamma-opts').style.display = m === 'gamma' ? 'block' : 'none';
+  document.getElementById('dec-caesar-opts').style.display = m === 'caesar' ? 'block' : 'none';
+}
+
+// Key length hint
+document.getElementById('encKey').addEventListener('input', function() {
+  document.getElementById('keyLenEnc').textContent = this.value.length || 0;
+});
+
+// ENCRYPT
+function doEncrypt() {
+  const text = document.getElementById('encInput').value;
+  const err = document.getElementById('encErr');
+  const res = document.getElementById('encResult');
+  const btn = document.getElementById('encCopyBtn');
+  err.classList.remove('show');
+  res.classList.remove('show');
+  btn.classList.remove('show');
+
+  if (!text.trim()) { err.textContent = 'Iltimos, matn kiriting!'; err.classList.add('show'); return; }
+
+  let result = '';
+  if (encMethod === 'gamma') {
+    const key = document.getElementById('encKey').value;
+    if (!key) { err.textContent = 'Kalit kiriting!'; err.classList.add('show'); return; }
+    result = gammaEncrypt(text, key);
+  } else if (encMethod === 'caesar') {
+    const shift = parseInt(document.getElementById('encShift').value);
+    result = caesarEncrypt(text, shift);
+  } else if (encMethod === 'base64') {
+    result = btoa(unescape(encodeURIComponent(text)));
+  } else if (encMethod === 'reverse') {
+    result = text.split('').reverse().join('');
+  }
+
+  res.textContent = result;
+  res.classList.add('show');
+  btn.classList.add('show');
+  btn.textContent = 'Nusxa olish';
+
+  saveHistory('shifrlash', encMethod, text, result);
+  showToast('Shifrlandi!');
+}
+
+// DECRYPT
+function doDecrypt() {
+  const text = document.getElementById('decInput').value.trim();
+  const err = document.getElementById('decErr');
+  const res = document.getElementById('decResult');
+  const btn = document.getElementById('decCopyBtn');
+  err.classList.remove('show');
+  res.classList.remove('show');
+  btn.classList.remove('show');
+
+  if (!text) { err.textContent = 'Iltimos, matn kiriting!'; err.classList.add('show'); return; }
+
+  let result = '';
+  try {
+    if (decMethod === 'gamma') {
+      const key = document.getElementById('decKey').value;
+      if (!key) { err.textContent = 'Kalit kiriting!'; err.classList.add('show'); return; }
+      if (!/^[0-9a-fA-F]+$/.test(text) || text.length % 2 !== 0) {
+        err.textContent = 'Notogri HEX format! Gamma bilan shifrlangan matn kiriting.';
+        err.classList.add('show'); return;
+      }
+      result = gammaDecrypt(text, key);
+    } else if (decMethod === 'caesar') {
+      const shift = parseInt(document.getElementById('decShift').value);
+      result = caesarDecrypt(text, shift);
+    } else if (decMethod === 'base64') {
+      result = decodeURIComponent(escape(atob(text)));
+    } else if (decMethod === 'reverse') {
+      result = text.split('').reverse().join('');
+    }
+  } catch(e) {
+    err.textContent = 'Ochib bolmadi. Usul yoki kalit togri emasmi?';
+    err.classList.add('show'); return;
+  }
+
+  res.textContent = result;
+  res.classList.add('show');
+  btn.classList.add('show');
+  btn.textContent = 'Nusxa olish';
+
+  saveHistory('ochish', decMethod, text, result);
+  showToast('Ochildi!');
+}
+
+// Gamma
+function gammaEncrypt(text, key) {
+  const kb = Array.from(key).map(c => c.charCodeAt(0));
+  return Array.from(text).map((c, i) => (c.charCodeAt(0) ^ kb[i % kb.length]).toString(16).padStart(2,'0')).join('');
+}
+function gammaDecrypt(hex, key) {
+  const kb = Array.from(key).map(c => c.charCodeAt(0));
+  let r = '';
+  for (let i = 0; i < hex.length; i += 2)
+    r += String.fromCharCode(parseInt(hex.substr(i,2),16) ^ kb[(i/2) % kb.length]);
+  return r;
+}
+
+// Caesar
+function caesarEncrypt(text, shift) {
+  return text.split('').map(c => {
+    const code = c.charCodeAt(0);
+    if (code >= 65 && code <= 90) return String.fromCharCode(((code - 65 + shift) % 26) + 65);
+    if (code >= 97 && code <= 122) return String.fromCharCode(((code - 97 + shift) % 26) + 97);
+    return c;
+  }).join('');
+}
+function caesarDecrypt(text, shift) {
+  return caesarEncrypt(text, 26 - (shift % 26));
+}
+
+// History
+function saveHistory(type, method, input, output) {
+  const item = {
+    type, method,
+    input: input.substring(0, 80),
+    output: output.substring(0, 80),
+    time: new Date().toLocaleTimeString('uz-UZ', {hour:'2-digit', minute:'2-digit'})
+  };
+  history.unshift(item);
+  if (history.length > 30) history.pop();
+  localStorage.setItem('cipherx_history', JSON.stringify(history));
+}
+
+function renderHistory() {
+  const list = document.getElementById('histList');
+  const clearBtn = document.getElementById('histClearBtn');
+  if (!history.length) {
+    list.innerHTML = '<div class="hist-empty">Hali hech narsa shifrlangani yoq</div>';
+    clearBtn.style.display = 'none';
+    return;
+  }
+  clearBtn.style.display = 'block';
+  list.innerHTML = history.map((h, i) => `
+    <div class="hist-item" onclick="useHistory(${i})">
+      <div class="hist-top">
+        <span class="hist-badge ${h.type==='shifrlash'?'badge-enc':'badge-dec'}">${h.type}</span>
+        <span class="hist-time">${h.time}</span>
+      </div>
+      <div class="hist-method">${methodName(h.method)}</div>
+      <div class="hist-preview">${h.input}</div>
+    </div>
+  `).join('');
+}
+
+function methodName(m) {
+  return {gamma:'Gamma (XOR)', caesar:'Sezar', base64:'Base64', reverse:'Teskari'}[m] || m;
+}
+
+function useHistory(i) {
+  const h = history[i];
+  if (h.type === 'shifrlash') {
+    document.getElementById('encInput').value = h.input;
+    showPage('encrypt', document.querySelectorAll('.nav-tab')[0]);
+  } else {
+    document.getElementById('decInput').value = h.input;
+    showPage('decrypt', document.querySelectorAll('.nav-tab')[1]);
+  }
+  showToast('Tarixdan yuklandi');
+}
+
+function clearHistory() {
+  history = [];
+  localStorage.removeItem('cipherx_history');
+  renderHistory();
+}
+
+function copyText(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).catch(() => {
+    const t = document.createElement('textarea');
+    t.value = text; document.body.appendChild(t); t.select();
+    document.execCommand('copy'); document.body.removeChild(t);
+  });
+  btn.textContent = 'Nusxa olindi!';
+  setTimeout(() => btn.textContent = 'Nusxa olish', 2000);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>
