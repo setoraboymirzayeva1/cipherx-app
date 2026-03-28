@@ -3,835 +3,1040 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>CipherX - Shifrlash Ilovasi</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<title>SecureKit Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ===== THEMES ===== */
 :root {
-  --bg: #0f0f13;
-  --surface: #1a1a24;
-  --surface2: #22222f;
-  --border: #2e2e3e;
-  --accent: #7c6af7;
-  --accent2: #4fd1c5;
-  --text: #e8e8f0;
-  --muted: #6b6b80;
-  --success: #4fd1c5;
-  --danger: #f06292;
-  --radius: 14px;
+  --bg:#f0f4ff;--s1:#ffffff;--s2:#f5f7ff;--s3:#e8edff;
+  --border:#dde3f8;--accent:#1a73e8;--green:#00b894;
+  --yellow:#f9a825;--red:#e53935;--purple:#7c4dff;
+  --orange:#f57c00;--text:#1a1f36;--muted:#6b7280;--r:14px;
 }
-.theme-blue {
-  --bg: #050d1a;
-  --surface: #0a1628;
-  --surface2: #0e1f38;
-  --border: #1a3055;
-  --accent: #3b9eff;
-  --accent2: #00e5c0;
-  --text: #e0efff;
-  --muted: #4a6080;
+body.theme-dark {
+  --bg:#07090f;--s1:#0d1117;--s2:#161b22;--s3:#21262d;
+  --border:#30363d;--accent:#58a6ff;--green:#3fb950;
+  --yellow:#e3b341;--red:#f85149;--purple:#bc8cff;
+  --orange:#ffa657;--text:#e6edf3;--muted:#8b949e;
 }
-.theme-green {
-  --bg: #080f0a;
-  --surface: #0e1f12;
-  --surface2: #122918;
-  --border: #1e4028;
-  --accent: #4caf7d;
-  --accent2: #a8ff78;
-  --text: #e0ffe8;
-  --muted: #3a6048;
+body.theme-blue {
+  --bg:#020c1b;--s1:#0a192f;--s2:#112240;--s3:#1d3461;
+  --border:#1e3a5f;--accent:#64ffda;--green:#64ffda;
+  --yellow:#ffd700;--red:#ff6b6b;--purple:#c792ea;
+  --orange:#ffcb6b;--text:#ccd6f6;--muted:#8892b0;
 }
-.theme-rose {
-  --bg: #130a10;
-  --surface: #201018;
-  --surface2: #2a1420;
-  --border: #3d1a2e;
-  --accent: #e05c8a;
-  --accent2: #ffa07a;
-  --text: #ffe8f0;
-  --muted: #6b3050;
+body.theme-purple {
+  --bg:#0d0014;--s1:#1a0030;--s2:#240040;--s3:#300055;
+  --border:#4a0080;--accent:#c084fc;--green:#4ade80;
+  --yellow:#fbbf24;--red:#f87171;--purple:#e879f9;
+  --orange:#fb923c;--text:#f3e8ff;--muted:#a78bfa;
 }
-.theme-light {
-  --bg: #f0f0f8;
-  --surface: #ffffff;
-  --surface2: #f5f5fc;
-  --border: #ddddf0;
-  --accent: #6c5ce7;
-  --accent2: #00b894;
-  --text: #1a1a2e;
-  --muted: #8888aa;
-  --success: #00b894;
+body.theme-green {
+  --bg:#f0fff4;--s1:#ffffff;--s2:#f0fdf4;--s3:#dcfce7;
+  --border:#bbf7d0;--accent:#16a34a;--green:#15803d;
+  --yellow:#ca8a04;--red:#dc2626;--purple:#7c3aed;
+  --orange:#ea580c;--text:#14532d;--muted:#6b7280;
+}
+body.theme-red {
+  --bg:#fff5f5;--s1:#ffffff;--s2:#fff0f0;--s3:#ffe4e4;
+  --border:#fecaca;--accent:#dc2626;--green:#16a34a;
+  --yellow:#ca8a04;--red:#b91c1c;--purple:#7c3aed;
+  --orange:#ea580c;--text:#450a0a;--muted:#9ca3af;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
-
-body {
-  font-family: 'Syne', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  transition: background 0.3s, color 0.3s;
-}
-
-/* Layout */
-.app { display: flex; flex-direction: column; min-height: 100vh; }
+body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:70px;transition:background 0.3s,color 0.3s;}
 
 /* Header */
-header {
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.logo {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-.logo span { color: var(--accent); }
+header{background:var(--s1);border-bottom:1px solid var(--border);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(26,115,232,0.08);}
+.logo{font-size:20px;font-weight:700;letter-spacing:1px;}
+.logo .s{color:var(--accent);}
+.logo .k{color:var(--green);}
+.hdr-btns{display:flex;gap:8px;align-items:center;}
+.hdr-btn{background:var(--s2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 12px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.hdr-btn:hover{border-color:var(--accent);color:var(--accent);}
 
-/* Theme picker */
-.themes {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.theme-dot {
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
-}
-.theme-dot:hover { transform: scale(1.2); }
-.theme-dot.active { border-color: var(--text); transform: scale(1.15); }
-.td-dark  { background: linear-gradient(135deg, #7c6af7, #4fd1c5); }
-.td-blue  { background: linear-gradient(135deg, #3b9eff, #00e5c0); }
-.td-green { background: linear-gradient(135deg, #4caf7d, #a8ff78); }
-.td-rose  { background: linear-gradient(135deg, #e05c8a, #ffa07a); }
-.td-light { background: linear-gradient(135deg, #6c5ce7, #fff); border: 1px solid #ccc; }
-
-/* Nav tabs */
-nav {
-  display: flex;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 0 20px;
-  gap: 4px;
-}
-.nav-tab {
-  padding: 12px 18px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-  letter-spacing: 0.5px;
-}
-.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+/* Bottom Nav */
+.bnav-bar{position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1px solid var(--border);display:flex;z-index:200;padding:2px 0;box-shadow:0 -2px 12px rgba(26,115,232,0.08);}
+.bnav{flex:1;border:none;background:transparent;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;color:var(--muted);cursor:pointer;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:color 0.2s;}
+.bnav.active{color:var(--accent);}
+.bnav-ic{font-size:18px;line-height:1;}
 
 /* Pages */
-.page { display: none; padding: 20px; max-width: 540px; margin: 0 auto; width: 100%; }
-.page.active { display: block; }
+.page{display:none !important;padding:14px;max-width:560px;margin:0 auto;}
+.page.active{display:block !important;}
+.pg-title{font-size:22px;font-weight:700;letter-spacing:-0.5px;margin-bottom:2px;}
+.pg-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:16px;}
 
-/* Card */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
-  transition: background 0.3s;
-}
-.card-head {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--muted);
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
+/* Cards */
+.card{background:var(--s1);border:1.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px;transition:background 0.3s;box-shadow:0 2px 8px rgba(26,115,232,0.05);}
+.card-label{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
 
-/* Method selector */
-.method-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-.method-btn {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1.5px solid var(--border);
-  background: var(--surface2);
-  color: var(--muted);
-  font-family: 'Syne', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: left;
-}
-.method-btn .m-name { font-size: 13px; color: var(--text); display: block; margin-bottom: 2px; }
-.method-btn .m-desc { font-size: 10px; }
-.method-btn.active {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface2));
-  color: var(--accent);
-}
-.method-btn.active .m-name { color: var(--accent); }
+/* Pills */
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.pill{padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--s2);color:var(--muted);font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.pill.active{border-color:var(--accent);color:var(--accent);background:rgba(88,166,255,0.1);}
 
-/* Input */
-.field { margin-bottom: 14px; }
-.field label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--muted);
-  text-transform: uppercase;
-  margin-bottom: 7px;
-}
-input, textarea {
-  width: 100%;
-  background: var(--surface2);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 14px;
-  font-size: 14px;
-  font-family: 'DM Mono', monospace;
-  color: var(--text);
-  outline: none;
-  transition: border-color 0.2s;
-}
-input:focus, textarea:focus { border-color: var(--accent); }
-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+/* Inputs */
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:5px;letter-spacing:1px;text-transform:uppercase;}
+input[type=text],input[type=password],textarea,select{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:11px 13px;font-size:14px;font-family:'JetBrains Mono',monospace;color:var(--text);outline:none;transition:border-color 0.2s;}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);}
+textarea{resize:vertical;min-height:90px;line-height:1.6;}
+select{cursor:pointer;}
+option{background:var(--s2);}
 
-/* Key hint */
-.key-hint {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 5px;
-  font-family: 'DM Mono', monospace;
-}
-.key-hint span { color: var(--accent2); }
+/* Buttons */
+.btn{width:100%;padding:13px;border-radius:10px;border:none;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.2s;margin-bottom:8px;}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.btn:active{transform:translateY(0);}
+.btn-blue{background:var(--accent);color:#000;}
+.btn-green{background:var(--green);color:#000;}
+.btn-purple{background:var(--purple);color:#000;}
+.btn-orange{background:var(--orange);color:#000;}
+.btn-red{background:var(--red);color:#fff;}
+.btn-row{display:flex;gap:8px;}
+.btn-row .btn{flex:1;margin-bottom:0;}
+.btn-sm{padding:7px 13px;border-radius:7px;border:1px solid var(--border);background:var(--s2);color:var(--muted);font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;width:auto;}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent);}
 
-/* Action button */
-.action-btn {
-  width: 100%;
-  padding: 15px;
-  border-radius: 12px;
-  border: none;
-  font-family: 'Syne', sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-bottom: 12px;
-}
-.btn-encrypt {
-  background: var(--accent);
-  color: #fff;
-}
-.btn-encrypt:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 40%, transparent); }
-.btn-decrypt {
-  background: var(--surface2);
-  color: var(--accent2);
-  border: 1.5px solid var(--accent2);
-}
-.btn-decrypt:hover { background: color-mix(in srgb, var(--accent2) 12%, var(--surface2)); transform: translateY(-1px); }
-.action-btn:active { transform: translateY(0); }
+/* Slider */
+.slider-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.slider-row label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+input[type=range]{flex:1;height:4px;accent-color:var(--accent);background:var(--border);border:none;padding:0;border-radius:2px;cursor:pointer;}
+.sval{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--accent);width:30px;text-align:center;}
 
 /* Result */
-.result-area {
-  background: var(--surface2);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  font-family: 'DM Mono', monospace;
-  font-size: 13px;
-  color: var(--accent2);
-  word-break: break-all;
-  line-height: 1.7;
-  min-height: 48px;
-  display: none;
-  margin-bottom: 10px;
-}
-.result-area.show { display: block; }
+.result-box{background:var(--s2);border:1px solid rgba(63,185,80,0.3);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--green);word-break:break-all;line-height:1.8;margin-top:10px;display:none;}
+.result-box.show{display:block;}
+.result-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
 
-.copy-btn {
-  width: 100%;
-  padding: 11px;
-  border-radius: 10px;
-  border: 1.5px solid var(--border);
-  background: transparent;
-  color: var(--muted);
-  font-family: 'Syne', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: none;
-}
-.copy-btn.show { display: block; }
-.copy-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+/* Info */
+.info-box{background:rgba(88,166,255,0.07);border:1px solid rgba(88,166,255,0.2);border-radius:8px;padding:10px 13px;font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;}
+.info-box b{color:var(--accent);}
+.info-box.green{background:rgba(63,185,80,0.07);border-color:rgba(63,185,80,0.2);}
+.info-box.green b{color:var(--green);}
 
 /* Error */
-.err {
-  font-size: 12px;
-  color: var(--danger);
-  margin-top: 6px;
-  display: none;
-  font-family: 'DM Mono', monospace;
-}
-.err.show { display: block; }
+.err{font-size:12px;color:var(--red);margin-top:6px;display:none;font-family:'JetBrains Mono',monospace;padding:8px;background:rgba(248,81,73,0.1);border-radius:6px;}
+.err.show{display:block;}
 
-/* History page */
-.hist-empty {
-  text-align: center;
-  padding: 48px 20px;
-  color: var(--muted);
-  font-size: 14px;
-}
-.hist-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-.hist-item:hover { border-color: var(--accent); }
-.hist-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.hist-badge {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 3px 8px;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
-.badge-enc { background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent); }
-.badge-dec { background: color-mix(in srgb, var(--accent2) 20%, transparent); color: var(--accent2); }
-.hist-time { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
-.hist-method { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
-.hist-preview {
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0.7;
-}
-.hist-clear {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1.5px solid var(--danger);
-  background: transparent;
-  color: var(--danger);
-  font-family: 'Syne', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 8px;
-  transition: all 0.2s;
-}
-.hist-clear:hover { background: color-mix(in srgb, var(--danger) 15%, transparent); }
+/* Password */
+.pw-display{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:2px;color:var(--accent);word-break:break-all;text-align:center;cursor:pointer;margin-bottom:10px;}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.chk{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600;}
+.chk input{width:15px;height:15px;accent-color:var(--accent);cursor:pointer;}
+.strength-bar{height:5px;border-radius:3px;background:var(--s3);margin-bottom:6px;overflow:hidden;}
+.strength-fill{height:100%;border-radius:3px;transition:all 0.4s;width:0;}
+.str-row{display:flex;justify-content:space-between;}
+.str-txt{font-size:13px;font-weight:700;}
+.str-pct{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+.str-tips{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;line-height:1.8;margin-top:6px;}
 
-/* Caesar shift */
-.shift-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-.shift-row label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
-input[type=range] {
-  flex: 1;
-  height: 4px;
-  accent-color: var(--accent);
-  background: var(--border);
-  border: none;
-  border-radius: 2px;
-  padding: 0;
-}
-.shift-val {
-  font-family: 'DM Mono', monospace;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--accent);
-  width: 32px;
-  text-align: center;
-}
+/* Hash */
+.hash-item{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;display:none;}
+.hash-item.show{display:block;}
+.hash-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.hash-name{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--purple);text-transform:uppercase;}
+.hash-bits{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.hash-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);word-break:break-all;line-height:1.6;}
+
+/* QR */
+.qr-wrap{text-align:center;padding:8px 0;}
+
+/* History */
+.hist-item{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer;transition:border-color 0.2s;}
+.hist-item:hover{border-color:var(--accent);}
+.hist-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.hist-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;}
+.hb-enc{background:rgba(88,166,255,0.15);color:var(--accent);}
+.hb-dec{background:rgba(63,185,80,0.15);color:var(--green);}
+.hb-hash{background:rgba(188,140,255,0.15);color:var(--purple);}
+.hb-pw{background:rgba(255,166,87,0.15);color:var(--orange);}
+.hb-qr{background:rgba(227,179,65,0.15);color:var(--yellow);}
+.hb-note{background:rgba(248,81,73,0.15);color:var(--red);}
+.hist-time{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.hist-method{font-size:11px;color:var(--muted);margin-bottom:4px;}
+.hist-prev{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0.7;}
+.hist-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px;}
+
+/* Safe Notes */
+.note-item{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;}
+.note-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.note-title{font-size:15px;font-weight:700;}
+.note-date{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.note-locked{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.note-actions{display:flex;gap:6px;margin-top:8px;}
+.note-empty{text-align:center;padding:40px 20px;color:var(--muted);}
+
+/* Settings - themes */
+.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.theme-btn{border:2px solid var(--border);border-radius:10px;padding:12px 8px;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;}
+.theme-btn:hover{border-color:var(--accent);}
+.theme-btn.active{border-color:var(--accent);}
+.theme-dot-row{display:flex;gap:4px;justify-content:center;margin-bottom:6px;}
+.td{width:14px;height:14px;border-radius:50%;}
+
+/* Lang selector */
+.lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.lang-btn{border:2px solid var(--border);border-radius:10px;padding:12px 8px;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;background:var(--s2);color:var(--text);}
+.lang-btn:hover{border-color:var(--accent);}
+.lang-btn.active{border-color:var(--accent);color:var(--accent);}
+
+/* Home */
+.home-banner{background:linear-gradient(135deg,#1a73e8,#1557b0);border:none;border-radius:var(--r);padding:24px 20px;margin-bottom:16px;text-align:center;color:#fff;box-shadow:0 8px 24px rgba(26,115,232,0.3);}
+.home-banner h2{font-size:26px;font-weight:700;margin-bottom:4px;color:#fff;}
+.home-banner p{font-size:11px;color:rgba(255,255,255,0.75);font-family:'JetBrains Mono',monospace;}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.tc{background:var(--s1);border:1.5px solid var(--border);border-radius:var(--r);padding:16px;cursor:pointer;transition:all 0.2s;text-align:center;box-shadow:0 2px 8px rgba(26,115,232,0.06);}
+.tc:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 6px 20px rgba(26,115,232,0.15);}
+.tc-ic{font-size:28px;margin-bottom:6px;}
+.tc-name{font-size:14px;font-weight:700;margin-bottom:3px;}
+.tc-desc{font-size:11px;color:var(--muted);line-height:1.4;}
 
 /* Toast */
-.toast {
-  position: fixed;
-  bottom: 24px; left: 50%;
-  transform: translateX(-50%) translateY(80px);
-  background: var(--surface);
-  border: 1px solid var(--accent);
-  color: var(--text);
-  padding: 12px 22px;
-  border-radius: 24px;
-  font-size: 13px;
-  font-weight: 700;
-  transition: transform 0.3s;
-  z-index: 999;
-  pointer-events: none;
-  white-space: nowrap;
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--s2);border:1px solid var(--accent);color:var(--text);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:700;transition:transform 0.3s,opacity 0.3s;z-index:999;pointer-events:none;white-space:nowrap;opacity:0;visibility:hidden;}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible;}
 
-/* About page */
-.about-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 14px;
-}
-.about-title { font-size: 15px; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
-.about-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
-.about-text b { color: var(--text); }
-.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.tag {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  color: var(--accent);
-  letter-spacing: 0.5px;
-}
-
-/* Page title */
-.page-title {
-  font-size: 22px;
-  font-weight: 800;
-  margin-bottom: 6px;
-  letter-spacing: -0.5px;
-}
-.page-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+/* Divider */
+.divider{display:flex;align-items:center;gap:10px;margin:12px 0;color:var(--muted);font-size:11px;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
 </style>
 </head>
 <body>
-<div class="app">
 
 <header>
-  <div class="logo">Cipher<span>X</span></div>
-  <div class="themes">
-    <div class="theme-dot td-dark active" onclick="setTheme('', this)" title="Qorongʻi"></div>
-    <div class="theme-dot td-blue"  onclick="setTheme('theme-blue', this)" title="Koʻk"></div>
-    <div class="theme-dot td-green" onclick="setTheme('theme-green', this)" title="Yashil"></div>
-    <div class="theme-dot td-rose"  onclick="setTheme('theme-rose', this)" title="Qizil"></div>
-    <div class="theme-dot td-light" onclick="setTheme('theme-light', this)" title="Kunduzgi"></div>
+  <div class="logo"><span class="s">Secure</span><span class="k">Kit</span> <span style="font-size:12px;color:var(--muted);font-weight:400">Pro</span></div>
+  <div class="hdr-btns">
+    <button class="hdr-btn" onclick="goPage('settings')">⚙</button>
   </div>
 </header>
 
-<nav>
-  <button class="nav-tab active" onclick="showPage('encrypt', this)">Shifrlash</button>
-  <button class="nav-tab" onclick="showPage('decrypt', this)">Ochish</button>
-  <button class="nav-tab" onclick="showPage('history', this)">Tarix</button>
-  <button class="nav-tab" onclick="showPage('about', this)">Haqida</button>
-</nav>
-
-<!-- SHIFRLASH -->
-<div class="page active" id="page-encrypt">
-  <div class="page-title">Shifrlash</div>
-  <p class="page-sub">Matnni tanlangan usul bilan shifrlang</p>
-
-  <div class="card">
-    <div class="card-head">Shifrlash usuli</div>
-    <div class="method-grid">
-      <button class="method-btn active" onclick="setMethod('gamma', this)">
-        <span class="m-name">Gamma (XOR)</span>
-        <span class="m-desc">Kalit bilan XOR</span>
-      </button>
-      <button class="method-btn" onclick="setMethod('caesar', this)">
-        <span class="m-name">Sezar</span>
-        <span class="m-desc">Harflarni siljitish</span>
-      </button>
-      <button class="method-btn" onclick="setMethod('base64', this)">
-        <span class="m-name">Base64</span>
-        <span class="m-desc">Kodlash (kalit shart emas)</span>
-      </button>
-      <button class="method-btn" onclick="setMethod('reverse', this)">
-        <span class="m-name">Teskari</span>
-        <span class="m-desc">Matnni teskari yozish</span>
-      </button>
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="home-banner">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div style="text-align:left;">
+        <div style="font-size:13px;opacity:0.8;margin-bottom:4px;" id="t-subtitle">Xush kelibsiz!</div>
+        <h2 style="font-size:24px;margin-bottom:4px;">SecureKit Pro</h2>
+        <p style="font-size:12px;opacity:0.75;">Telefoningiz himoyalangan</p>
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 12px;margin-top:8px;font-size:11px;">
+          <span style="width:8px;height:8px;background:#4ade80;border-radius:50%;display:inline-block;"></span>
+          <span>Barcha tizimlar xavfsiz</span>
+        </div>
+      </div>
+      <div style="font-size:64px;line-height:1;">🛡</div>
     </div>
   </div>
-
-  <div class="card" id="enc-gamma-opts">
-    <div class="card-head">Kalit</div>
-    <div class="field">
-      <input type="text" id="encKey" placeholder="Kalit sozini kiriting..." value="KALIT"/>
-    </div>
-    <div class="key-hint">Kalit uzunligi: <span id="keyLenEnc">5</span> belgi</div>
-  </div>
-
-  <div class="card" id="enc-caesar-opts" style="display:none">
-    <div class="card-head">Siljish miqdori</div>
-    <div class="shift-row">
-      <label>Shift</label>
-      <input type="range" id="encShift" min="1" max="25" value="3" oninput="document.getElementById('encShiftVal').textContent=this.value"/>
-      <div class="shift-val" id="encShiftVal">3</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">Matn</div>
-    <div class="field">
-      <textarea id="encInput" placeholder="Bu yerga matn yozing..."></textarea>
-    </div>
-    <button class="action-btn btn-encrypt" onclick="doEncrypt()">Shifrlash</button>
-    <div class="err" id="encErr">Iltimos, matn kiriting!</div>
-    <div class="result-area" id="encResult"></div>
-    <button class="copy-btn" id="encCopyBtn" onclick="copyText('encResult', this)">Nusxa olish</button>
+  <div class="tools-grid">
+    <div class="tc" onclick="goPage('cipher')"><div class="tc-ic">🔐</div><div class="tc-name" data-t="cipher_title">Shifrlash</div><div class="tc-desc" data-t="cipher_desc">7 ta usul</div></div>
+    <div class="tc" onclick="goPage('password')"><div class="tc-ic">🔑</div><div class="tc-name" data-t="pw_title">Parol</div><div class="tc-desc" data-t="pw_desc">Generator + Tekshiruv</div></div>
+    <div class="tc" onclick="goPage('hash')"><div class="tc-ic">🧮</div><div class="tc-name" data-t="hash_title">Hash</div><div class="tc-desc" data-t="hash_desc">MD5, SHA-1/256/512</div></div>
+    <div class="tc" onclick="goPage('qr')"><div class="tc-ic">▦</div><div class="tc-name" data-t="qr_title">QR Kod</div><div class="tc-desc" data-t="qr_desc">Matndan QR yaratish</div></div>
+    <div class="tc" onclick="goPage('notes')"><div class="tc-ic">🔒</div><div class="tc-name" data-t="notes_title">Xavfsiz Eslatmalar</div><div class="tc-desc" data-t="notes_desc">AES-256 himoyalangan</div></div>
+    <div class="tc" onclick="goPage('history')"><div class="tc-ic">📋</div><div class="tc-name" data-t="hist_title">Tarix</div><div class="tc-desc" data-t="hist_desc">Barcha amallar</div></div>
   </div>
 </div>
 
-<!-- OCHISH -->
-<div class="page" id="page-decrypt">
-  <div class="page-title">Ochish</div>
-  <p class="page-sub">Shifrlangan matnni qaytaring</p>
+<!-- SHIFRLASH -->
+<div class="page" id="page-cipher">
+  <div class="pg-title" data-t="cipher_title">Shifrlash</div>
+  <div class="pg-sub">// encrypt & decrypt</div>
+  <div class="card">
+    <div class="card-label" data-t="method">Usul</div>
+    <div class="pills">
+      <button class="pill active" onclick="setCM('gamma',this)">Gamma XOR</button>
+      <button class="pill" onclick="setCM('aes',this)">AES-256</button>
+      <button class="pill" onclick="setCM('caesar',this)">Sezar</button>
+      <button class="pill" onclick="setCM('vigenere',this)">Vigenere</button>
+      <button class="pill" onclick="setCM('base64',this)">Base64</button>
+      <button class="pill" onclick="setCM('reverse',this)" data-t="reverse">Teskari</button>
+      <button class="pill" onclick="setCM('binary',this)">Binar</button>
+    </div>
+    <div id="blk-key" class="field">
+      <label data-t="key">Kalit</label>
+      <input type="password" id="ci-key" placeholder="Kalit so'zini kiriting..."/>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;" id="ci-key-hint"></div>
+    </div>
+    <div id="blk-shift" style="display:none">
+      <div class="slider-row">
+        <label>Shift</label>
+        <input type="range" id="ci-shift" min="1" max="25" value="3" oninput="document.getElementById('shv').textContent=this.value"/>
+        <div class="sval" id="shv">3</div>
+      </div>
+    </div>
+    <div class="info-box" id="ci-desc-box" style="margin-bottom:0;margin-top:0;"></div>
+  </div>
+  <div class="card">
+    <div class="card-label" data-t="text">Matn</div>
+    <div class="field"><textarea id="ci-in" placeholder="..."></textarea></div>
+    <div class="btn-row" style="margin-bottom:8px;">
+      <button class="btn btn-blue" onclick="doCipher('enc')" data-t="encrypt">Shifrlash</button>
+      <button class="btn btn-green" onclick="doCipher('dec')" data-t="decrypt">Ochish</button>
+    </div>
+    <div class="err" id="ci-err"></div>
+    <div class="result-box" id="ci-res"></div>
+    <div class="result-actions" id="ci-acts" style="display:none;">
+      <button class="btn-sm" onclick="cpEl('ci-res')" data-t="copy">Nusxa</button>
+      <button class="btn-sm" onclick="swapCI()" data-t="swap">Almashtir</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAROL -->
+<div class="page" id="page-password">
+  <div class="pg-title" data-t="pw_title">Parol Generatori</div>
+  <div class="pg-sub">// password generator & checker</div>
+  <div class="card">
+    <div class="card-label" data-t="generate">Yaratish</div>
+    <div class="slider-row">
+      <label data-t="length">Uzunlik</label>
+      <input type="range" id="pw-len" min="6" max="64" value="16" oninput="document.getElementById('pwlv').textContent=this.value;genPW()"/>
+      <div class="sval" id="pwlv">16</div>
+    </div>
+    <div class="check-grid">
+      <label class="chk"><input type="checkbox" id="pw-up" checked onchange="genPW()"> <span data-t="uppercase">A-Z katta</span></label>
+      <label class="chk"><input type="checkbox" id="pw-lo" checked onchange="genPW()"> <span data-t="lowercase">a-z kichik</span></label>
+      <label class="chk"><input type="checkbox" id="pw-nm" checked onchange="genPW()"> <span>0-9</span></label>
+      <label class="chk"><input type="checkbox" id="pw-sy" onchange="genPW()"> <span data-t="symbols">!@# belgi</span></label>
+    </div>
+    <div class="pw-display" id="pw-out" onclick="cpText(this.textContent)">...</div>
+    <button class="btn btn-blue" onclick="genPW()" data-t="new_pw">Yangi parol</button>
+    <div class="result-actions"><button class="btn-sm" onclick="cpText(document.getElementById('pw-out').textContent)" data-t="copy">Nusxa olish</button></div>
+  </div>
+  <div class="card">
+    <div class="card-label" data-t="check_strength">Mustahkamligi tekshiruvi</div>
+    <div class="field">
+      <label data-t="enter_pw">Parolni kiriting</label>
+      <input type="text" id="pw-chk" placeholder="..." oninput="chkPW(this.value)"/>
+    </div>
+    <div class="strength-bar"><div class="strength-fill" id="strf"></div></div>
+    <div class="str-row">
+      <div class="str-txt" id="strt" style="color:var(--muted)">...</div>
+      <div class="str-pct" id="strp"></div>
+    </div>
+    <div class="str-tips" id="strtips"></div>
+  </div>
+</div>
+
+<!-- HASH -->
+<div class="page" id="page-hash">
+  <div class="pg-title" data-t="hash_title">Hash Generator</div>
+  <div class="pg-sub">// MD5 · SHA-1 · SHA-256 · SHA-512</div>
+  <div class="info-box"><b>Hash</b> — <span data-t="hash_info">matnni qaytarib bo'lmaydigan kodga aylantirish. Parollarni saqlash va fayl butunligini tekshirishda ishlatiladi.</span></div>
+  <div class="card">
+    <div class="field"><textarea id="h-in" placeholder="..." oninput="genHash()"></textarea></div>
+    <button class="btn btn-purple" onclick="genHash()" data-t="generate_hash">Hash yaratish</button>
+  </div>
+  <div class="hash-item" id="hi-md5"><div class="hash-top"><div class="hash-name">MD5</div><div class="hash-bits">128 bit</div></div><div class="hash-val" id="hv-md5">-</div><div class="result-actions"><button class="btn-sm" onclick="cpText(document.getElementById('hv-md5').textContent)" data-t="copy">Nusxa</button></div></div>
+  <div class="hash-item" id="hi-sha1"><div class="hash-top"><div class="hash-name">SHA-1</div><div class="hash-bits">160 bit</div></div><div class="hash-val" id="hv-sha1">-</div><div class="result-actions"><button class="btn-sm" onclick="cpText(document.getElementById('hv-sha1').textContent)" data-t="copy">Nusxa</button></div></div>
+  <div class="hash-item" id="hi-sha256"><div class="hash-top"><div class="hash-name">SHA-256</div><div class="hash-bits">256 bit</div></div><div class="hash-val" id="hv-sha256">-</div><div class="result-actions"><button class="btn-sm" onclick="cpText(document.getElementById('hv-sha256').textContent)" data-t="copy">Nusxa</button></div></div>
+  <div class="hash-item" id="hi-sha512"><div class="hash-top"><div class="hash-name">SHA-512</div><div class="hash-bits">512 bit</div></div><div class="hash-val" id="hv-sha512">-</div><div class="result-actions"><button class="btn-sm" onclick="cpText(document.getElementById('hv-sha512').textContent)" data-t="copy">Nusxa</button></div></div>
+</div>
+
+<!-- QR -->
+<div class="page" id="page-qr">
+  <div class="pg-title" data-t="qr_title">QR Kod</div>
+  <div class="pg-sub">// matndan QR kod yaratish</div>
+  <div class="card">
+    <div class="field">
+      <label data-t="text">Matn yoki link</label>
+      <textarea id="qr-in" placeholder="..." style="min-height:100px"></textarea>
+    </div>
+    <div class="field">
+      <label data-t="color">Rang</label>
+      <div class="pills">
+        <button class="pill active" onclick="setQRC('#000','#fff',this)" data-t="black">Qora</button>
+        <button class="pill" onclick="setQRC('#1a73e8','#fff',this)" data-t="blue">Ko'k</button>
+        <button class="pill" onclick="setQRC('#1e8e3e','#fff',this)" data-t="green">Yashil</button>
+        <button class="pill" onclick="setQRC('#c62828','#fff',this)" data-t="red">Qizil</button>
+        <button class="pill" onclick="setQRC('#7b1fa2','#fff',this)">Binafsha</button>
+        <button class="pill" onclick="setQRC('#fff','#000',this)" data-t="white">Oq</button>
+      </div>
+    </div>
+    <div class="slider-row">
+      <label data-t="size">O'lcham</label>
+      <input type="range" id="qr-size" min="150" max="350" value="220" oninput="document.getElementById('qrsv').textContent=this.value"/>
+      <div class="sval" id="qrsv">220</div>
+    </div>
+    <button class="btn btn-green" onclick="genQR()" data-t="generate_qr">QR yaratish</button>
+  </div>
+  <div class="card" id="qr-card" style="display:none">
+    <div class="qr-wrap"><canvas id="qr-canvas" style="border-radius:10px;max-width:100%;"></canvas></div>
+    <div class="result-actions" style="justify-content:center;margin-top:10px;">
+      <button class="btn-sm" onclick="qrDownload()" data-t="download">Yuklab olish</button>
+    </div>
+  </div>
+</div>
+
+<!-- XAVFSIZ ESLATMALAR -->
+<div class="page" id="page-notes">
+  <div class="pg-title" data-t="notes_title">Xavfsiz Eslatmalar</div>
+  <div class="pg-sub">// AES-256 himoyalangan</div>
+  <div class="info-box green"><b>AES-256</b> — <span data-t="notes_info">eslatmalar shifrlangan holda saqlanadi. Kalit unutilsa, ochib bo'lmaydi!</span></div>
 
   <div class="card">
-    <div class="card-head">Shifrlash usuli</div>
-    <div class="method-grid">
-      <button class="method-btn active" onclick="setMethodDec('gamma', this)">
-        <span class="m-name">Gamma (XOR)</span>
-        <span class="m-desc">Kalit bilan XOR</span>
-      </button>
-      <button class="method-btn" onclick="setMethodDec('caesar', this)">
-        <span class="m-name">Sezar</span>
-        <span class="m-desc">Harflarni siljitish</span>
-      </button>
-      <button class="method-btn" onclick="setMethodDec('base64', this)">
-        <span class="m-name">Base64</span>
-        <span class="m-desc">Kodini ochish</span>
-      </button>
-      <button class="method-btn" onclick="setMethodDec('reverse', this)">
-        <span class="m-name">Teskari</span>
-        <span class="m-desc">Matnni teskari yozish</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="card" id="dec-gamma-opts">
-    <div class="card-head">Kalit</div>
+    <div class="card-label" data-t="add_note">Yangi eslatma</div>
     <div class="field">
-      <input type="text" id="decKey" placeholder="Xuddi shu kalitni kiriting..." value="KALIT"/>
+      <label data-t="title">Sarlavha</label>
+      <input type="text" id="note-title" placeholder="..."/>
     </div>
-  </div>
-
-  <div class="card" id="dec-caesar-opts" style="display:none">
-    <div class="card-head">Siljish miqdori</div>
-    <div class="shift-row">
-      <label>Shift</label>
-      <input type="range" id="decShift" min="1" max="25" value="3" oninput="document.getElementById('decShiftVal').textContent=this.value"/>
-      <div class="shift-val" id="decShiftVal">3</div>
+    <div class="field">
+      <label data-t="content">Mazmun</label>
+      <textarea id="note-content" placeholder="..." style="min-height:100px"></textarea>
     </div>
+    <div class="field">
+      <label data-t="key">Shifrlash kaliti</label>
+      <input type="password" id="note-key" placeholder="Maxfiy kalit (yodlab oling!)"/>
+    </div>
+    <button class="btn btn-orange" onclick="saveNote()" data-t="save_note">Saqlash</button>
+    <div class="err" id="note-err"></div>
   </div>
 
   <div class="card">
-    <div class="card-head">Shifrlangan matn</div>
-    <div class="field">
-      <textarea id="decInput" placeholder="Shifrlangan matnni bu yerga yozing..."></textarea>
-    </div>
-    <button class="action-btn btn-decrypt" onclick="doDecrypt()">Ochish</button>
-    <div class="err" id="decErr">Noto'gri format yoki kalit!</div>
-    <div class="result-area" id="decResult" style="color:var(--accent);"></div>
-    <button class="copy-btn" id="decCopyBtn" onclick="copyText('decResult', this)">Nusxa olish</button>
+    <div class="card-label" data-t="my_notes">Eslatmalarim</div>
+    <div id="notes-list"></div>
   </div>
 </div>
 
 <!-- TARIX -->
 <div class="page" id="page-history">
-  <div class="page-title">Tarix</div>
-  <p class="page-sub">Oxirgi shifrlash amallari</p>
-  <div id="histList"></div>
-  <button class="hist-clear" onclick="clearHistory()" style="display:none" id="histClearBtn">Tarixni tozalash</button>
+  <div class="pg-title" data-t="hist_title">Tarix</div>
+  <div class="pg-sub">// barcha amallar</div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:10px;">
+    <button class="btn-sm" onclick="clearHistory()" style="color:var(--red);border-color:var(--red);" data-t="clear_hist">Tozalash</button>
+  </div>
+  <div id="hist-list"></div>
 </div>
 
-<!-- HAQIDA -->
-<div class="page" id="page-about">
-  <div class="page-title">Haqida</div>
-  <p class="page-sub">CipherX shifrlash ilovasi</p>
+<!-- SOZLAMALAR -->
+<div class="page" id="page-settings">
+  <div class="pg-title" data-t="settings">Sozlamalar</div>
+  <div class="pg-sub">// settings</div>
 
-  <div class="about-card">
-    <div class="about-title">Gamma (XOR) shifrlash</div>
-    <div class="about-text">
-      Har bir belgi raqami kalit belgisi raqami bilan <b>XOR</b> (eksklyuziv OR) amalida birlashtiriladi. Natija HEX formatda chiqadi. Xuddi shu kalit bilan qayta XOR qilsangiz asl matn qaytadi.
+  <div class="card">
+    <div class="card-label" data-t="language">Til</div>
+    <div class="lang-grid">
+      <button class="lang-btn active" onclick="setLang('uz',this)">🇺🇿 O'zbek</button>
+      <button class="lang-btn" onclick="setLang('ru',this)">🇷🇺 Русский</button>
+      <button class="lang-btn" onclick="setLang('en',this)">🇬🇧 English</button>
     </div>
-    <div class="tag-row"><span class="tag">XOR</span><span class="tag">Simmetrik</span><span class="tag">Kalit kerak</span></div>
   </div>
 
-  <div class="about-card">
-    <div class="about-title">Sezar shifrlash</div>
-    <div class="about-text">
-      Har bir harf alifboda <b>N ta</b> oldinga siljitiladi. Masalan: shift=3 da "A" → "D" bo'ladi. Oddiy lekin tarixiy shifrlash usuli.
+  <div class="card">
+    <div class="card-label" data-t="theme">Rang / Mavzu</div>
+    <div class="theme-grid">
+      <div class="theme-btn active" onclick="setTheme('',this)">
+        <div class="theme-dot-row"><div class="td" style="background:#1a73e8"></div><div class="td" style="background:#00b894"></div><div class="td" style="background:#f0f4ff"></div></div>
+        <span>Ko'k (Asosiy)</span>
+      </div>
+      <div class="theme-btn" onclick="setTheme('theme-dark',this)">
+        <div class="theme-dot-row"><div class="td" style="background:#58a6ff"></div><div class="td" style="background:#3fb950"></div><div class="td" style="background:#07090f"></div></div>
+        <span data-t="dark">Qorong'i</span>
+      </div>
+      <div class="theme-btn" onclick="setTheme('theme-blue',this)">
+        <div class="theme-dot-row"><div class="td" style="background:#64ffda"></div><div class="td" style="background:#ccd6f6"></div><div class="td" style="background:#020c1b"></div></div>
+        <span data-t="blue">Dengiz</span>
+      </div>
+      <div class="theme-btn" onclick="setTheme('theme-purple',this)">
+        <div class="theme-dot-row"><div class="td" style="background:#c084fc"></div><div class="td" style="background:#e879f9"></div><div class="td" style="background:#0d0014"></div></div>
+        <span data-t="purple">Binafsha</span>
+      </div>
+      <div class="theme-btn" onclick="setTheme('theme-green',this)">
+        <div class="theme-dot-row"><div class="td" style="background:#16a34a"></div><div class="td" style="background:#86efac"></div><div class="td" style="background:#f0fff4"></div></div>
+        <span data-t="green">Yashil</span>
+      </div>
+      <div class="theme-btn" onclick="setTheme('theme-red',this)">
+        <div class="theme-dot-row"><div class="td" style="background:#dc2626"></div><div class="td" style="background:#fecaca"></div><div class="td" style="background:#fff5f5"></div></div>
+        <span data-t="red">Qizil</span>
+      </div>
     </div>
-    <div class="tag-row"><span class="tag">Siljish</span><span class="tag">Lotin/Kirill</span></div>
   </div>
 
-  <div class="about-card">
-    <div class="about-title">Base64</div>
-    <div class="about-text">
-      Matnni <b>64 ta belgi</b> asosida kodlaydi. Shifrlash emas, kodlash — kalit shart emas. Ko'pincha ma'lumot uzatishda ishlatiladi.
+  <div class="card">
+    <div class="card-label">SecureKit Pro</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.8;font-family:'JetBrains Mono',monospace;">
+      Version: 3.0.0<br>
+      AES-256 · SHA-256 · MD5<br>
+      QR Generator · Safe Notes
     </div>
-    <div class="tag-row"><span class="tag">Kodlash</span><span class="tag">Kalitsiz</span></div>
-  </div>
-
-  <div class="about-card">
-    <div class="about-title">Teskari yozish</div>
-    <div class="about-text">
-      Matnni <b>teskari tartibda</b> yozadi. Eng oddiy shifrlash usuli. Ochish uchun ham xuddi shu amal qilinadi.
-    </div>
-    <div class="tag-row"><span class="tag">Oddiy</span><span class="tag">Tezkor</span></div>
   </div>
 </div>
 
-</div>
+<!-- Bottom Nav -->
+<nav class="bnav-bar">
+  <button class="bnav active" onclick="goPage('home',this)"><span class="bnav-ic">🏠</span><span data-t="home">Bosh</span></button>
+  <button class="bnav" onclick="goPage('cipher',this)"><span class="bnav-ic">🔐</span><span data-t="cipher_short">Shifr</span></button>
+  <button class="bnav" onclick="goPage('password',this)"><span class="bnav-ic">🔑</span><span data-t="pw_short">Parol</span></button>
+  <button class="bnav" onclick="goPage('hash',this)"><span class="bnav-ic">🧮</span><span>Hash</span></button>
+  <button class="bnav" onclick="goPage('qr',this)"><span class="bnav-ic">▦</span><span>QR</span></button>
+  <button class="bnav" onclick="goPage('notes',this)"><span class="bnav-ic">🔒</span><span data-t="notes_short">Eslatma</span></button>
+  <button class="bnav" onclick="goPage('history',this)"><span class="bnav-ic">📋</span><span data-t="hist_short">Tarix</span></button>
+</nav>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// State
-let encMethod = 'gamma';
-let decMethod = 'gamma';
-let history = JSON.parse(localStorage.getItem('cipherx_history') || '[]');
+// ============================================================
+// TRANSLATIONS
+// ============================================================
+const LANGS = {
+  uz: {
+    cipher_title:'Shifrlash', cipher_desc:'7 ta usul', cipher_short:'Shifr',
+    pw_title:'Parol Generatori', pw_desc:'Generator + Tekshiruv', pw_short:'Parol',
+    hash_title:'Hash Generator', hash_desc:'MD5, SHA-1/256/512',
+    qr_title:'QR Kod', qr_desc:'Matndan QR yaratish',
+    notes_title:'Xavfsiz Eslatmalar', notes_desc:'AES-256 himoyalangan', notes_short:'Eslatma',
+    hist_title:'Tarix', hist_desc:'Barcha amallar', hist_short:'Tarix',
+    home:'Bosh', settings:'Sozlamalar', language:'Til', theme:'Rang/Mavzu',
+    method:'Usul', key:'Kalit', text:'Matn', encrypt:'Shifrlash', decrypt:'Ochish',
+    copy:'Nusxa', swap:'Almashtir', generate:'Yaratish', length:'Uzunlik',
+    uppercase:'A-Z katta', lowercase:'a-z kichik', symbols:'!@# belgi',
+    new_pw:'Yangi parol', check_strength:'Mustahkamligi tekshiruvi',
+    enter_pw:'Parolni kiriting', generate_hash:'Hash yaratish',
+    hash_info:'matnni qaytarib bo\'lmaydigan kodga aylantirish.',
+    color:'Rang', size:'O\'lcham', generate_qr:'QR yaratish', download:'Yuklab olish',
+    add_note:'Yangi eslatma', title:'Sarlavha', content:'Mazmun',
+    save_note:'Saqlash', my_notes:'Eslatmalarim',
+    notes_info:'eslatmalar shifrlangan holda saqlanadi. Kalit unutilsa ochib bo\'lmaydi!',
+    clear_hist:'Tozalash', reverse:'Teskari', black:'Qora', blue:'Ko\'k',
+    green:'Yashil', red:'Qizil', white:'Oq', dark:'Qorong\'i', purple:'Binafsha',
+    light:'Kunduzgi', subtitle:'// kiberxavfsizlik vositalari',
+    weak:'Juda zaif', fair:'Zaif', medium:'O\'rtacha', good:'Yaxshi', strong:'Juda kuchli!',
+    locked:'Shifrlangan', open_note:'Ochish', delete_note:'O\'chirish',
+    enter_key_to_open:'Ochish uchun kalit kiriting:', confirm_delete:'O\'chirishni tasdiqlaysizmi?',
+    hist_empty:'Hali hech narsa amalga oshirilmadi', note_empty:'Eslatmalar yo\'q',
+    note_saved:'Eslatma saqlandi!', note_deleted:'O\'chirildi', copied:'Nusxa olindi!',
+    encrypted:'Shifrlandi!', decrypted:'Ochildi!', qr_created:'QR kod yaratildi!',
+    fill_all:'Barcha maydonlarni to\'ldiring!', wrong_key:'Kalit noto\'g\'ri!',
+    no_text:'Matn kiriting!', no_key:'Kalit kiriting!'
+  },
+  ru: {
+    cipher_title:'Шифрование', cipher_desc:'7 методов', cipher_short:'Шифр',
+    pw_title:'Генератор паролей', pw_desc:'Генератор + Проверка', pw_short:'Пароль',
+    hash_title:'Генератор Hash', hash_desc:'MD5, SHA-1/256/512',
+    qr_title:'QR Код', qr_desc:'Создание QR из текста',
+    notes_title:'Защищённые Заметки', notes_desc:'Защита AES-256', notes_short:'Заметки',
+    hist_title:'История', hist_desc:'Все операции', hist_short:'История',
+    home:'Главная', settings:'Настройки', language:'Язык', theme:'Тема',
+    method:'Метод', key:'Ключ', text:'Текст', encrypt:'Зашифровать', decrypt:'Расшифровать',
+    copy:'Копировать', swap:'Поменять', generate:'Создать', length:'Длина',
+    uppercase:'A-Z заглавные', lowercase:'a-z строчные', symbols:'!@# символы',
+    new_pw:'Новый пароль', check_strength:'Проверка надёжности',
+    enter_pw:'Введите пароль', generate_hash:'Создать Hash',
+    hash_info:'преобразует текст в необратимый код.',
+    color:'Цвет', size:'Размер', generate_qr:'Создать QR', download:'Скачать',
+    add_note:'Новая заметка', title:'Заголовок', content:'Содержание',
+    save_note:'Сохранить', my_notes:'Мои заметки',
+    notes_info:'заметки хранятся в зашифрованном виде. Если забудете ключ — не откроется!',
+    clear_hist:'Очистить', reverse:'Обратный', black:'Чёрный', blue:'Синий',
+    green:'Зелёный', red:'Красный', white:'Белый', dark:'Тёмная', purple:'Фиолетовый',
+    light:'Светлая', subtitle:'// инструменты кибербезопасности',
+    weak:'Очень слабый', fair:'Слабый', medium:'Средний', good:'Хороший', strong:'Очень сильный!',
+    locked:'Зашифровано', open_note:'Открыть', delete_note:'Удалить',
+    enter_key_to_open:'Введите ключ для открытия:', confirm_delete:'Удалить заметку?',
+    hist_empty:'История пуста', note_empty:'Заметок нет',
+    note_saved:'Заметка сохранена!', note_deleted:'Удалено', copied:'Скопировано!',
+    encrypted:'Зашифровано!', decrypted:'Расшифровано!', qr_created:'QR создан!',
+    fill_all:'Заполните все поля!', wrong_key:'Неверный ключ!',
+    no_text:'Введите текст!', no_key:'Введите ключ!'
+  },
+  en: {
+    cipher_title:'Encryption', cipher_desc:'7 methods', cipher_short:'Cipher',
+    pw_title:'Password Generator', pw_desc:'Generator + Checker', pw_short:'Password',
+    hash_title:'Hash Generator', hash_desc:'MD5, SHA-1/256/512',
+    qr_title:'QR Code', qr_desc:'Generate QR from text',
+    notes_title:'Safe Notes', notes_desc:'AES-256 protected', notes_short:'Notes',
+    hist_title:'History', hist_desc:'All operations', hist_short:'History',
+    home:'Home', settings:'Settings', language:'Language', theme:'Theme',
+    method:'Method', key:'Key', text:'Text', encrypt:'Encrypt', decrypt:'Decrypt',
+    copy:'Copy', swap:'Swap', generate:'Generate', length:'Length',
+    uppercase:'A-Z uppercase', lowercase:'a-z lowercase', symbols:'!@# symbols',
+    new_pw:'New password', check_strength:'Strength checker',
+    enter_pw:'Enter password', generate_hash:'Generate Hash',
+    hash_info:'converts text into an irreversible code.',
+    color:'Color', size:'Size', generate_qr:'Generate QR', download:'Download',
+    add_note:'New Note', title:'Title', content:'Content',
+    save_note:'Save', my_notes:'My Notes',
+    notes_info:'notes are stored encrypted. If you forget the key, it cannot be opened!',
+    clear_hist:'Clear', reverse:'Reverse', black:'Black', blue:'Blue',
+    green:'Green', red:'Red', white:'White', dark:'Dark', purple:'Purple',
+    light:'Light', subtitle:'// cybersecurity toolkit',
+    weak:'Very weak', fair:'Weak', medium:'Medium', good:'Good', strong:'Very strong!',
+    locked:'Encrypted', open_note:'Open', delete_note:'Delete',
+    enter_key_to_open:'Enter key to open:', confirm_delete:'Delete this note?',
+    hist_empty:'No history yet', note_empty:'No notes yet',
+    note_saved:'Note saved!', note_deleted:'Deleted', copied:'Copied!',
+    encrypted:'Encrypted!', decrypted:'Decrypted!', qr_created:'QR code created!',
+    fill_all:'Fill in all fields!', wrong_key:'Wrong key!',
+    no_text:'Enter text!', no_key:'Enter key!'
+  }
+};
 
-// Theme
-function setTheme(cls, dot) {
-  document.body.className = cls;
-  document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
-  dot.classList.add('active');
+let lang = localStorage.getItem('sk_lang') || 'uz';
+let T = LANGS[lang];
+
+function setLang(l, btn) {
+  lang = l; T = LANGS[l];
+  localStorage.setItem('sk_lang', l);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  applyLang();
+  toast(T.settings);
 }
 
-// Nav
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  btn.classList.add('active');
-  if (id === 'history') renderHistory();
+function applyLang() {
+  T = LANGS[lang];
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const key = el.getAttribute('data-t');
+    if(T[key]) el.textContent = T[key];
+  });
+  const sub = document.getElementById('t-subtitle');
+  if(sub) sub.textContent = T.subtitle;
+  // update cipher desc
+  updateCipherDesc();
+  // update strength label
+  const strt = document.getElementById('strt');
+  if(strt && strt.textContent === '...') strt.textContent = T.enter_pw || '...';
+  // update history
+  renderHistory();
+  renderNotes();
 }
 
-// Method
-function setMethod(m, btn) {
-  encMethod = m;
-  document.querySelectorAll('#page-encrypt .method-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('enc-gamma-opts').style.display = m === 'gamma' ? 'block' : 'none';
-  document.getElementById('enc-caesar-opts').style.display = m === 'caesar' ? 'block' : 'none';
-}
-function setMethodDec(m, btn) {
-  decMethod = m;
-  document.querySelectorAll('#page-decrypt .method-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('dec-gamma-opts').style.display = m === 'gamma' ? 'block' : 'none';
-  document.getElementById('dec-caesar-opts').style.display = m === 'caesar' ? 'block' : 'none';
-}
+// ============================================================
+// NAV
+// ============================================================
+function goPage(id, btn) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+  // Deactivate all nav buttons
+  document.querySelectorAll('.bnav').forEach(b => b.classList.remove('active'));
 
-// Key length hint
-document.getElementById('encKey').addEventListener('input', function() {
-  document.getElementById('keyLenEnc').textContent = this.value.length || 0;
-});
-
-// ENCRYPT
-function doEncrypt() {
-  const text = document.getElementById('encInput').value;
-  const err = document.getElementById('encErr');
-  const res = document.getElementById('encResult');
-  const btn = document.getElementById('encCopyBtn');
-  err.classList.remove('show');
-  res.classList.remove('show');
-  btn.classList.remove('show');
-
-  if (!text.trim()) { err.textContent = 'Iltimos, matn kiriting!'; err.classList.add('show'); return; }
-
-  let result = '';
-  if (encMethod === 'gamma') {
-    const key = document.getElementById('encKey').value;
-    if (!key) { err.textContent = 'Kalit kiriting!'; err.classList.add('show'); return; }
-    result = gammaEncrypt(text, key);
-  } else if (encMethod === 'caesar') {
-    const shift = parseInt(document.getElementById('encShift').value);
-    result = caesarEncrypt(text, shift);
-  } else if (encMethod === 'base64') {
-    result = btoa(unescape(encodeURIComponent(text)));
-  } else if (encMethod === 'reverse') {
-    result = text.split('').reverse().join('');
+  // Show target page
+  const target = document.getElementById('page-' + id);
+  if(target) {
+    target.classList.add('active');
+    target.style.display = 'block';
   }
 
-  res.textContent = result;
-  res.classList.add('show');
-  btn.classList.add('show');
-  btn.textContent = 'Nusxa olish';
-
-  saveHistory('shifrlash', encMethod, text, result);
-  showToast('Shifrlandi!');
-}
-
-// DECRYPT
-function doDecrypt() {
-  const text = document.getElementById('decInput').value.trim();
-  const err = document.getElementById('decErr');
-  const res = document.getElementById('decResult');
-  const btn = document.getElementById('decCopyBtn');
-  err.classList.remove('show');
-  res.classList.remove('show');
-  btn.classList.remove('show');
-
-  if (!text) { err.textContent = 'Iltimos, matn kiriting!'; err.classList.add('show'); return; }
-
-  let result = '';
-  try {
-    if (decMethod === 'gamma') {
-      const key = document.getElementById('decKey').value;
-      if (!key) { err.textContent = 'Kalit kiriting!'; err.classList.add('show'); return; }
-      if (!/^[0-9a-fA-F]+$/.test(text) || text.length % 2 !== 0) {
-        err.textContent = 'Notogri HEX format! Gamma bilan shifrlangan matn kiriting.';
-        err.classList.add('show'); return;
+  // Activate nav button
+  if(btn) {
+    btn.classList.add('active');
+  } else {
+    // Find matching bnav by onclick attribute
+    document.querySelectorAll('.bnav').forEach(b => {
+      if(b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) {
+        b.classList.add('active');
       }
-      result = gammaDecrypt(text, key);
-    } else if (decMethod === 'caesar') {
-      const shift = parseInt(document.getElementById('decShift').value);
-      result = caesarDecrypt(text, shift);
-    } else if (decMethod === 'base64') {
-      result = decodeURIComponent(escape(atob(text)));
-    } else if (decMethod === 'reverse') {
-      result = text.split('').reverse().join('');
-    }
-  } catch(e) {
-    err.textContent = 'Ochib bolmadi. Usul yoki kalit togri emasmi?';
-    err.classList.add('show'); return;
+    });
   }
 
-  res.textContent = result;
-  res.classList.add('show');
-  btn.classList.add('show');
-  btn.textContent = 'Nusxa olish';
+  if(id === 'history') renderHistory();
+  if(id === 'notes') renderNotes();
 
-  saveHistory('ochish', decMethod, text, result);
-  showToast('Ochildi!');
+  // Scroll to top
+  window.scrollTo(0, 0);
+  // Hide toast immediately on page change
+  hideToast();
 }
 
-// Gamma
-function gammaEncrypt(text, key) {
-  const kb = Array.from(key).map(c => c.charCodeAt(0));
-  return Array.from(text).map((c, i) => (c.charCodeAt(0) ^ kb[i % kb.length]).toString(16).padStart(2,'0')).join('');
-}
-function gammaDecrypt(hex, key) {
-  const kb = Array.from(key).map(c => c.charCodeAt(0));
-  let r = '';
-  for (let i = 0; i < hex.length; i += 2)
-    r += String.fromCharCode(parseInt(hex.substr(i,2),16) ^ kb[(i/2) % kb.length]);
-  return r;
+// ============================================================
+// THEME
+// ============================================================
+function setTheme(cls, btn) {
+  document.body.className = cls;
+  localStorage.setItem('sk_theme', cls);
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  toast(T.settings || 'Mavzu o'zgardi!');
 }
 
+// ============================================================
+// CIPHER
+// ============================================================
+let CM = 'gamma';
+const CDESC = {
+  gamma: { uz:'Gamma XOR: har bir belgi kalit belgisi bilan XOR qilinadi. Natija HEX formatda.', ru:'Gamma XOR: каждый символ XOR-ится с символом ключа. Результат в HEX.', en:'Gamma XOR: each char is XORed with key char. Output in HEX format.' },
+  aes:   { uz:'AES-256: eng kuchli simmetrik shifrlash. Kalit 8+ belgi bo\'lsin. Natija Base64 formatda.', ru:'AES-256: самое мощное симметричное шифрование. Ключ 8+ символов.', en:'AES-256: strongest symmetric encryption. Key must be 8+ characters.' },
+  caesar:{ uz:'Sezar: har bir harf N ta siljitiladi. Tarixiy shifrlash usuli.', ru:'Цезарь: каждая буква сдвигается на N позиций.', en:'Caesar: each letter is shifted by N positions.' },
+  vigenere:{ uz:'Vigenere: Sezarning kuchliroq versiyasi. Kalit takrorlanib har bir harf siljitiladi.', ru:'Виженер: улучшенный Цезарь. Ключ повторяется для каждой буквы.', en:'Vigenere: improved Caesar. Key repeats for each letter.' },
+  base64:{ uz:'Base64: 64 ta belgi asosida kodlaydi. Kalit shart emas.', ru:'Base64: кодирует в 64 символа. Ключ не нужен.', en:'Base64: encodes using 64 characters. No key needed.' },
+  reverse:{ uz:'Teskari: matnni teskari tartibda yozadi.', ru:'Обратный: текст в обратном порядке.', en:'Reverse: writes text in reverse order.' },
+  binary:{ uz:'Binar: matnni ikkilik (0/1) sistemasida ifodalaydi.', ru:'Бинарный: текст в двоичной системе (0/1).', en:'Binary: text in binary (0/1) format.' }
+};
+
+function updateCipherDesc() {
+  const box = document.getElementById('ci-desc-box');
+  if(box && CDESC[CM]) box.textContent = CDESC[CM][lang] || CDESC[CM].uz;
+}
+
+function setCM(m, btn) {
+  CM = m;
+  document.querySelectorAll('#page-cipher .pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('blk-key').style.display = ['gamma','vigenere','aes'].includes(m)?'block':'none';
+  document.getElementById('blk-shift').style.display = m==='caesar'?'block':'none';
+  const hint = document.getElementById('ci-key-hint');
+  hint.textContent = m==='aes' ? (lang==='ru'?'Минимум 8 символов':lang==='en'?'Minimum 8 characters':'Kamida 8 ta belgi') : '';
+  updateCipherDesc();
+}
+
+async function doCipher(mode) {
+  const txt = document.getElementById('ci-in').value;
+  const key = document.getElementById('ci-key').value;
+  const sh  = parseInt(document.getElementById('ci-shift').value);
+  const err = document.getElementById('ci-err');
+  err.classList.remove('show');
+  if(!txt.trim()){err.textContent=T.no_text;err.classList.add('show');return;}
+  if(['gamma','vigenere','aes'].includes(CM)&&!key){err.textContent=T.no_key;err.classList.add('show');return;}
+  if(CM==='aes'&&key.length<8){err.textContent=(lang==='ru'?'Ключ минимум 8 символов!':lang==='en'?'Key must be at least 8 characters!':'Kalit kamida 8 ta belgi bo\'lsin!');err.classList.add('show');return;}
+
+  let r='';
+  try {
+    if(CM==='gamma')    r = mode==='enc'?gEnc(txt,key):gDec(txt,key);
+    else if(CM==='aes') r = mode==='enc'? await aesEnc(txt,key) : await aesDec(txt,key);
+    else if(CM==='caesar') r = mode==='enc'?cEnc(txt,sh):cEnc(txt,26-sh%26);
+    else if(CM==='vigenere') r = mode==='enc'?vEnc(txt,key):vDec(txt,key);
+    else if(CM==='base64') r = mode==='enc'?btoa(unescape(encodeURIComponent(txt))):decodeURIComponent(escape(atob(txt.trim())));
+    else if(CM==='reverse') r = txt.split('').reverse().join('');
+    else if(CM==='binary') r = mode==='enc'
+      ? Array.from(txt).map(c=>c.charCodeAt(0).toString(2).padStart(8,'0')).join(' ')
+      : txt.trim().split(/\s+/).map(b=>String.fromCharCode(parseInt(b,2))).join('');
+  } catch(e){err.textContent=T.wrong_key;err.classList.add('show');return;}
+
+  const res=document.getElementById('ci-res');
+  res.textContent=r; res.classList.add('show');
+  document.getElementById('ci-acts').style.display='flex';
+  addHistory(mode==='enc'?'enc':'dec', CM, txt.substring(0,60), r.substring(0,60));
+  toast(mode==='enc'?T.encrypted:T.decrypted);
+}
+
+function swapCI(){
+  const a=document.getElementById('ci-in'),b=document.getElementById('ci-res');
+  const t=a.value; a.value=b.textContent; b.textContent=t;
+}
+
+// Gamma XOR
+function gEnc(t,k){const kb=Array.from(k).map(c=>c.charCodeAt(0));return Array.from(t).map((c,i)=>(c.charCodeAt(0)^kb[i%kb.length]).toString(16).padStart(2,'0')).join('');}
+function gDec(h,k){h=h.trim();if(!/^[0-9a-fA-F]+$/.test(h)||h.length%2!==0)throw 0;const kb=Array.from(k).map(c=>c.charCodeAt(0));let r='';for(let i=0;i<h.length;i+=2)r+=String.fromCharCode(parseInt(h.substr(i,2),16)^kb[(i/2)%kb.length]);return r;}
 // Caesar
-function caesarEncrypt(text, shift) {
-  return text.split('').map(c => {
-    const code = c.charCodeAt(0);
-    if (code >= 65 && code <= 90) return String.fromCharCode(((code - 65 + shift) % 26) + 65);
-    if (code >= 97 && code <= 122) return String.fromCharCode(((code - 97 + shift) % 26) + 97);
-    return c;
-  }).join('');
-}
-function caesarDecrypt(text, shift) {
-  return caesarEncrypt(text, 26 - (shift % 26));
+function cEnc(t,s){return t.split('').map(c=>{const cd=c.charCodeAt(0);if(cd>=65&&cd<=90)return String.fromCharCode(((cd-65+s)%26)+65);if(cd>=97&&cd<=122)return String.fromCharCode(((cd-97+s)%26)+97);return c;}).join('');}
+// Vigenere
+function vEnc(t,k){k=k.toUpperCase();let r='',j=0;for(let c of t){const cd=c.charCodeAt(0);if(cd>=65&&cd<=90){r+=String.fromCharCode(((cd-65+(k.charCodeAt(j%k.length)-65))%26)+65);j++;}else if(cd>=97&&cd<=122){r+=String.fromCharCode(((cd-97+(k.charCodeAt(j%k.length)-65))%26)+97);j++;}else r+=c;}return r;}
+function vDec(t,k){k=k.toUpperCase();let r='',j=0;for(let c of t){const cd=c.charCodeAt(0);if(cd>=65&&cd<=90){r+=String.fromCharCode(((cd-65-(k.charCodeAt(j%k.length)-65)+26)%26)+65);j++;}else if(cd>=97&&cd<=122){r+=String.fromCharCode(((cd-97-(k.charCodeAt(j%k.length)-65)+26)%26)+97);j++;}else r+=c;}return r;}
+
+// ============================================================
+// AES-256 (Web Crypto API)
+// ============================================================
+async function getAESKey(password, salt) {
+  const enc = new TextEncoder();
+  const keyMat = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    {name:'PBKDF2', salt, iterations:100000, hash:'SHA-256'},
+    keyMat,
+    {name:'AES-GCM', length:256},
+    false, ['encrypt','decrypt']
+  );
 }
 
-// History
-function saveHistory(type, method, input, output) {
-  const item = {
-    type, method,
-    input: input.substring(0, 80),
-    output: output.substring(0, 80),
-    time: new Date().toLocaleTimeString('uz-UZ', {hour:'2-digit', minute:'2-digit'})
-  };
-  history.unshift(item);
-  if (history.length > 30) history.pop();
-  localStorage.setItem('cipherx_history', JSON.stringify(history));
+async function aesEnc(text, password) {
+  const enc = new TextEncoder();
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv   = crypto.getRandomValues(new Uint8Array(12));
+  const key  = await getAESKey(password, salt);
+  const cipher = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(text));
+  const buf = new Uint8Array(salt.length + iv.length + cipher.byteLength);
+  buf.set(salt, 0); buf.set(iv, 16); buf.set(new Uint8Array(cipher), 28);
+  return btoa(String.fromCharCode(...buf));
 }
 
-function renderHistory() {
-  const list = document.getElementById('histList');
-  const clearBtn = document.getElementById('histClearBtn');
-  if (!history.length) {
-    list.innerHTML = '<div class="hist-empty">Hali hech narsa shifrlangani yoq</div>';
-    clearBtn.style.display = 'none';
-    return;
-  }
-  clearBtn.style.display = 'block';
-  list.innerHTML = history.map((h, i) => `
-    <div class="hist-item" onclick="useHistory(${i})">
-      <div class="hist-top">
-        <span class="hist-badge ${h.type==='shifrlash'?'badge-enc':'badge-dec'}">${h.type}</span>
-        <span class="hist-time">${h.time}</span>
+async function aesDec(b64, password) {
+  const buf = Uint8Array.from(atob(b64), c=>c.charCodeAt(0));
+  const salt = buf.slice(0,16), iv = buf.slice(16,28), data = buf.slice(28);
+  const key = await getAESKey(password, salt);
+  const plain = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, data);
+  return new TextDecoder().decode(plain);
+}
+
+// ============================================================
+// PASSWORD
+// ============================================================
+function genPW(){
+  const len=parseInt(document.getElementById('pw-len').value);
+  let ch='';
+  if(document.getElementById('pw-up').checked) ch+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(document.getElementById('pw-lo').checked) ch+='abcdefghijklmnopqrstuvwxyz';
+  if(document.getElementById('pw-nm').checked) ch+='0123456789';
+  if(document.getElementById('pw-sy').checked) ch+='!@#$%^&*_+-=?';
+  if(!ch) ch='abcdefghijklmnopqrstuvwxyz';
+  const arr=new Uint8Array(len); crypto.getRandomValues(arr);
+  const pw=Array.from(arr).map(b=>ch[b%ch.length]).join('');
+  document.getElementById('pw-out').textContent=pw;
+  chkPW(pw);
+  addHistory('pw', 'password', pw.substring(0,20), '***');
+}
+
+function chkPW(pw){
+  if(!pw){document.getElementById('strf').style.width='0';document.getElementById('strt').textContent=T.enter_pw;document.getElementById('strt').style.color='var(--muted)';document.getElementById('strp').textContent='';document.getElementById('strtips').textContent='';return;}
+  let s=0;const tips=[];
+  if(pw.length>=8)s++;else tips.push(lang==='ru'?'Минимум 8 символов':lang==='en'?'At least 8 chars':'Kamida 8 belgi');
+  if(pw.length>=12)s++;else if(pw.length>=8)tips.push(lang==='ru'?'12+ лучше':lang==='en'?'12+ is better':'12+ belgi yaxshiroq');
+  if(pw.length>=16)s++;
+  if(/[A-Z]/.test(pw))s++;else tips.push(lang==='ru'?'Добавьте заглавные (A-Z)':lang==='en'?'Add uppercase (A-Z)':'Katta harf (A-Z)');
+  if(/[a-z]/.test(pw))s++;else tips.push(lang==='ru'?'Добавьте строчные (a-z)':lang==='en'?'Add lowercase (a-z)':'Kichik harf (a-z)');
+  if(/[0-9]/.test(pw))s++;else tips.push(lang==='ru'?'Добавьте цифры':lang==='en'?'Add numbers':'Raqam qo\'shing');
+  if(/[^A-Za-z0-9]/.test(pw))s+=2;else tips.push(lang==='ru'?'Добавьте символы (!@#)':lang==='en'?'Add symbols (!@#)':'Belgi qo\'shing (!@#)');
+  if(pw.length>=20)s++;
+  const pct=Math.min(100,Math.round((s/9)*100));
+  const f=document.getElementById('strf'),t=document.getElementById('strt'),p=document.getElementById('strp');
+  f.style.width=pct+'%'; p.textContent=pct+'%';
+  let label,color;
+  if(pct<25){label=T.weak;color='var(--red)';}
+  else if(pct<50){label=T.fair;color='var(--orange)';}
+  else if(pct<70){label=T.medium;color='var(--yellow)';}
+  else if(pct<85){label=T.good;color='var(--green)';}
+  else{label=T.strong;color='var(--accent)';}
+  f.style.background=color; t.style.color=color; t.textContent=label;
+  document.getElementById('strtips').textContent=tips.length?(lang==='ru'?'Советы:\n- ':lang==='en'?'Tips:\n- ':'Maslahat:\n- ')+tips.join('\n- '):(lang==='ru'?'Отличный пароль!':lang==='en'?'Great password!':'Ajoyib parol!');
+}
+
+// ============================================================
+// HASH
+// ============================================================
+async function genHash(){
+  const txt=document.getElementById('h-in').value;
+  if(!txt.trim()) return;
+  ['md5','sha1','sha256','sha512'].forEach(h=>document.getElementById('hi-'+h).classList.add('show'));
+  document.getElementById('hv-md5').textContent=md5(txt);
+  document.getElementById('hv-sha1').textContent=await shaH('SHA-1',txt);
+  document.getElementById('hv-sha256').textContent=await shaH('SHA-256',txt);
+  document.getElementById('hv-sha512').textContent=await shaH('SHA-512',txt);
+  addHistory('hash','MD5/SHA',txt.substring(0,40),'');
+}
+async function shaH(a,t){const b=await crypto.subtle.digest(a,new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+function md5(s){function sa(x,y){var l=(x&0xffff)+(y&0xffff),m=(x>>16)+(y>>16)+(l>>16);return(m<<16)|(l&0xffff);}function br(n,c){return(n<<c)|(n>>>(32-c));}function cm(q,a,b,x,s,t){return sa(br(sa(sa(a,q),sa(x,t)),s),b);}function ff(a,b,c,d,x,s,t){return cm((b&c)|((~b)&d),a,b,x,s,t);}function gg(a,b,c,d,x,s,t){return cm((b&d)|(c&(~d)),a,b,x,s,t);}function hh(a,b,c,d,x,s,t){return cm(b^c^d,a,b,x,s,t);}function ii(a,b,c,d,x,s,t){return cm(c^(b|(~d)),a,b,x,s,t);}function s2b(s){var b={};for(var i=0;i<s.length*8;i+=8)b[i>>5]|=(s.charCodeAt(i/8)&0xff)<<(i%32);return b;}function b2h(b){var h='0123456789abcdef',s='';for(var i=0;i<b.length*4;i++)s+=h.charAt((b[i>>2]>>((i%4)*8+4))&0xf)+h.charAt((b[i>>2]>>((i%4)*8))&0xf);return s;}function core(x,l){x[l>>5]|=0x80<<(l%32);x[(((l+64)>>>9)<<4)+14]=l;var a=1732584193,b=-271733879,c=-1732584194,d=271733878;for(var i=0;i<x.length;i+=16){var oa=a,ob=b,oc=c,od=d;a=ff(a,b,c,d,x[i],7,-680876936);d=ff(d,a,b,c,x[i+1],12,-389564586);c=ff(c,d,a,b,x[i+2],17,606105819);b=ff(b,c,d,a,x[i+3],22,-1044525330);a=ff(a,b,c,d,x[i+4],7,-176418897);d=ff(d,a,b,c,x[i+5],12,1200080426);c=ff(c,d,a,b,x[i+6],17,-1473231341);b=ff(b,c,d,a,x[i+7],22,-45705983);a=ff(a,b,c,d,x[i+8],7,1770035416);d=ff(d,a,b,c,x[i+9],12,-1958414417);c=ff(c,d,a,b,x[i+10],17,-42063);b=ff(b,c,d,a,x[i+11],22,-1990404162);a=ff(a,b,c,d,x[i+12],7,1804603682);d=ff(d,a,b,c,x[i+13],12,-40341101);c=ff(c,d,a,b,x[i+14],17,-1502002290);b=ff(b,c,d,a,x[i+15],22,1236535329);a=gg(a,b,c,d,x[i+1],5,-165796510);d=gg(d,a,b,c,x[i+6],9,-1069501632);c=gg(c,d,a,b,x[i+11],14,643717713);b=gg(b,c,d,a,x[i],20,-373897302);a=gg(a,b,c,d,x[i+5],5,-701558691);d=gg(d,a,b,c,x[i+10],9,38016083);c=gg(c,d,a,b,x[i+15],14,-660478335);b=gg(b,c,d,a,x[i+4],20,-405537848);a=gg(a,b,c,d,x[i+9],5,568446438);d=gg(d,a,b,c,x[i+14],9,-1019803690);c=gg(c,d,a,b,x[i+3],14,-187363961);b=gg(b,c,d,a,x[i+8],20,1163531501);a=gg(a,b,c,d,x[i+13],5,-1444681467);d=gg(d,a,b,c,x[i+2],9,-51403784);c=gg(c,d,a,b,x[i+7],14,1735328473);b=gg(b,c,d,a,x[i+12],20,-1926607734);a=hh(a,b,c,d,x[i+5],4,-378558);d=hh(d,a,b,c,x[i+8],11,-2022574463);c=hh(c,d,a,b,x[i+11],16,1839030562);b=hh(b,c,d,a,x[i+14],23,-35309556);a=hh(a,b,c,d,x[i+1],4,-1530992060);d=hh(d,a,b,c,x[i+4],11,1272893353);c=hh(c,d,a,b,x[i+7],16,-155497632);b=hh(b,c,d,a,x[i+10],23,-1094730640);a=hh(a,b,c,d,x[i+13],4,681279174);d=hh(d,a,b,c,x[i],11,-358537222);c=hh(c,d,a,b,x[i+3],16,-722521979);b=hh(b,c,d,a,x[i+6],23,76029189);a=hh(a,b,c,d,x[i+9],4,-640364487);d=hh(d,a,b,c,x[i+12],11,-421815835);c=hh(c,d,a,b,x[i+15],16,530742520);b=hh(b,c,d,a,x[i+2],23,-995338651);a=ii(a,b,c,d,x[i],6,-198630844);d=ii(d,a,b,c,x[i+7],10,1126891415);c=ii(c,d,a,b,x[i+14],15,-1416354905);b=ii(b,c,d,a,x[i+5],21,-57434055);a=ii(a,b,c,d,x[i+12],6,1700485571);d=ii(d,a,b,c,x[i+3],10,-1894986606);c=ii(c,d,a,b,x[i+10],15,-1051523);b=ii(b,c,d,a,x[i+1],21,-2054922799);a=ii(a,b,c,d,x[i+8],6,1873313359);d=ii(d,a,b,c,x[i+15],10,-30611744);c=ii(c,d,a,b,x[i+6],15,-1560198380);b=ii(b,c,d,a,x[i+13],21,1309151649);a=ii(a,b,c,d,x[i+4],6,-145523070);d=ii(d,a,b,c,x[i+11],10,-1120210379);c=ii(c,d,a,b,x[i+2],15,718787259);b=ii(b,c,d,a,x[i+9],21,-343485551);a=sa(a,oa);b=sa(b,ob);c=sa(c,oc);d=sa(d,od);}return[a,b,c,d];}return b2h(core(s2b(s),s.length*8));}
+
+// ============================================================
+// QR
+// ============================================================
+let qrFg='#000', qrBg='#fff';
+function setQRC(fg,bg,btn){qrFg=fg;qrBg=bg;document.querySelectorAll('#page-qr .pill').forEach(p=>p.classList.remove('active'));btn.classList.add('active');}
+
+function genQR(){
+  const text=document.getElementById('qr-in').value.trim();
+  if(!text){toast(T.no_text);return;}
+  const size=parseInt(document.getElementById('qr-size').value);
+  const canvas=document.getElementById('qr-canvas');
+  canvas.width=size; canvas.height=size;
+  const ctx=canvas.getContext('2d');
+  const img=new Image();
+  img.crossOrigin='anonymous';
+  img.onload=()=>{ctx.drawImage(img,0,0,size,size);document.getElementById('qr-card').style.display='block';addHistory('qr','QR',text.substring(0,40),'');toast(T.qr_created);};
+  img.onerror=()=>{drawQR(ctx,text,size);document.getElementById('qr-card').style.display='block';toast(T.qr_created);};
+  img.src='https://api.qrserver.com/v1/create-qr-code/?size='+size+'x'+size+'&data='+encodeURIComponent(text)+'&color='+qrFg.replace('#','')+'&bgcolor='+qrBg.replace('#','')+'&format=png&margin=10';
+}
+
+function drawQR(ctx,text,size){
+  ctx.fillStyle=qrBg;ctx.fillRect(0,0,size,size);
+  const cells=25,cell=Math.floor((size-20)/cells),pad=Math.floor((size-cells*cell)/2);
+  let hash=0;for(let i=0;i<text.length;i++)hash=((hash<<5)-hash)+text.charCodeAt(i);
+  const mat=Array.from({length:cells},()=>new Array(cells).fill(false));
+  function sq(r,c,s){for(let i=r;i<r+s;i++)for(let j=c;j<c+s;j++)mat[i][j]=true;for(let i=r+1;i<r+s-1;i++)for(let j=c+1;j<c+s-1;j++)mat[i][j]=false;for(let i=r+2;i<r+s-2;i++)for(let j=c+2;j<c+s-2;j++)mat[i][j]=true;}
+  sq(0,0,7);sq(0,cells-7,7);sq(cells-7,0,7);
+  for(let r=0;r<cells;r++)for(let c=0;c<cells;c++){if(r<8&&(c<8||c>=cells-8))continue;if(r>=cells-8&&c<8)continue;if(((hash^(r*cells+c)*2654435761)>>>0)%2===0)mat[r][c]=true;}
+  ctx.fillStyle=qrFg;
+  for(let r=0;r<cells;r++)for(let c=0;c<cells;c++)if(mat[r][c])ctx.fillRect(pad+c*cell,pad+r*cell,cell,cell);
+}
+
+function qrDownload(){const a=document.createElement('a');a.download='qr.png';a.href=document.getElementById('qr-canvas').toDataURL('image/png');document.body.appendChild(a);a.click();document.body.removeChild(a);}
+
+// ============================================================
+// SAFE NOTES (AES-256)
+// ============================================================
+let notes = JSON.parse(localStorage.getItem('sk_notes')||'[]');
+
+async function saveNote(){
+  const title=document.getElementById('note-title').value.trim();
+  const content=document.getElementById('note-content').value.trim();
+  const key=document.getElementById('note-key').value;
+  const err=document.getElementById('note-err');
+  err.classList.remove('show');
+  if(!title||!content||!key){err.textContent=T.fill_all;err.classList.add('show');return;}
+  if(key.length<4){err.textContent=(lang==='ru'?'Ключ минимум 4 символа':lang==='en'?'Key min 4 chars':'Kalit kamida 4 ta belgi');err.classList.add('show');return;}
+
+  const enc=await aesEnc(content,key);
+  const note={id:Date.now(),title,enc,date:new Date().toLocaleString()};
+  notes.unshift(note);
+  localStorage.setItem('sk_notes',JSON.stringify(notes));
+  document.getElementById('note-title').value='';
+  document.getElementById('note-content').value='';
+  document.getElementById('note-key').value='';
+  renderNotes();
+  addHistory('note','Safe Note',title,'[encrypted]');
+  toast(T.note_saved);
+}
+
+function renderNotes(){
+  const list=document.getElementById('notes-list');
+  if(!notes.length){list.innerHTML='<div class="note-empty">'+T.note_empty+'</div>';return;}
+  list.innerHTML=notes.map((n,i)=>`
+    <div class="note-item">
+      <div class="note-top">
+        <div class="note-title">${n.title}</div>
+        <div class="note-date">${n.date}</div>
       </div>
-      <div class="hist-method">${methodName(h.method)}</div>
-      <div class="hist-preview">${h.input}</div>
+      <div class="note-locked" id="note-body-${n.id}">🔒 ${T.locked}</div>
+      <div class="note-actions">
+        <button class="btn-sm" onclick="openNote(${n.id})">${T.open_note}</button>
+        <button class="btn-sm" style="color:var(--red);border-color:var(--red);" onclick="deleteNote(${i})">${T.delete_note}</button>
+      </div>
     </div>
   `).join('');
 }
 
-function methodName(m) {
-  return {gamma:'Gamma (XOR)', caesar:'Sezar', base64:'Base64', reverse:'Teskari'}[m] || m;
+async function openNote(id){
+  const key=prompt(T.enter_key_to_open);
+  if(!key) return;
+  const note=notes.find(n=>n.id===id);
+  if(!note) return;
+  try {
+    const plain=await aesDec(note.enc,key);
+    const el=document.getElementById('note-body-'+id);
+    if(el){el.textContent=plain;el.style.color='var(--green)';el.style.fontFamily="'JetBrains Mono',monospace";el.style.fontSize='13px';}
+  } catch(e){toast(T.wrong_key);}
 }
 
-function useHistory(i) {
-  const h = history[i];
-  if (h.type === 'shifrlash') {
-    document.getElementById('encInput').value = h.input;
-    showPage('encrypt', document.querySelectorAll('.nav-tab')[0]);
-  } else {
-    document.getElementById('decInput').value = h.input;
-    showPage('decrypt', document.querySelectorAll('.nav-tab')[1]);
-  }
-  showToast('Tarixdan yuklandi');
+function deleteNote(i){
+  if(!confirm(T.confirm_delete)) return;
+  notes.splice(i,1);
+  localStorage.setItem('sk_notes',JSON.stringify(notes));
+  renderNotes();
+  toast(T.note_deleted);
 }
 
-function clearHistory() {
-  history = [];
-  localStorage.removeItem('cipherx_history');
+// ============================================================
+// HISTORY
+// ============================================================
+let history = JSON.parse(localStorage.getItem('sk_history')||'[]');
+
+const HTYPE = {
+  enc:{cls:'hb-enc',icon:'🔐'},
+  dec:{cls:'hb-dec',icon:'🔓'},
+  hash:{cls:'hb-hash',icon:'🧮'},
+  pw:{cls:'hb-pw',icon:'🔑'},
+  qr:{cls:'hb-qr',icon:'▦'},
+  note:{cls:'hb-note',icon:'🔒'}
+};
+const HLABEL = {
+  enc:{uz:'Shifrlash',ru:'Шифрование',en:'Encrypt'},
+  dec:{uz:'Ochish',ru:'Расшифровка',en:'Decrypt'},
+  hash:{uz:'Hash',ru:'Hash',en:'Hash'},
+  pw:{uz:'Parol',ru:'Пароль',en:'Password'},
+  qr:{uz:'QR Kod',ru:'QR Код',en:'QR Code'},
+  note:{uz:'Eslatma',ru:'Заметка',en:'Note'}
+};
+
+function addHistory(type, method, input, output){
+  const item={type,method,input,output,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),date:new Date().toLocaleDateString()};
+  history.unshift(item);
+  if(history.length>50) history.pop();
+  localStorage.setItem('sk_history',JSON.stringify(history));
+}
+
+function renderHistory(){
+  const list=document.getElementById('hist-list');
+  if(!list) return;
+  if(!history.length){list.innerHTML='<div class="hist-empty">'+T.hist_empty+'</div>';return;}
+  list.innerHTML=history.map((h,i)=>{
+    const ht=HTYPE[h.type]||HTYPE.enc;
+    const label=HLABEL[h.type]?HLABEL[h.type][lang]:h.type;
+    return `<div class="hist-item" id="hist-item-${i}">
+      <div class="hist-top">
+        <span class="hist-badge ${ht.cls}">${ht.icon} ${label}</span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="hist-time">${h.date} ${h.time}</span>
+          <button onclick="deleteHistItem(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;padding:0 4px;line-height:1;" title="O'chirish">×</button>
+        </div>
+      </div>
+      <div class="hist-method" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);">${h.method}</div>
+      <div class="hist-prev">${h.input||''}</div>
+      ${h.output?'<div class="hist-prev" style="color:var(--green);margin-top:3px;">→ '+h.output+'</div>':''}
+    </div>`;
+  }).join('');
+}
+
+function deleteHistItem(i){
+  history.splice(i,1);
+  localStorage.setItem('sk_history',JSON.stringify(history));
   renderHistory();
 }
 
-function copyText(id, btn) {
-  const text = document.getElementById(id).textContent;
-  navigator.clipboard.writeText(text).catch(() => {
-    const t = document.createElement('textarea');
-    t.value = text; document.body.appendChild(t); t.select();
-    document.execCommand('copy'); document.body.removeChild(t);
-  });
-  btn.textContent = 'Nusxa olindi!';
-  setTimeout(() => btn.textContent = 'Nusxa olish', 2000);
+function clearHistory(){
+  history=[];
+  localStorage.setItem('sk_history',JSON.stringify(history));
+  renderHistory();
+  toast(T.clear_hist);
 }
 
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
+// ============================================================
+// UTILS
+// ============================================================
+function cpEl(id){cpText(document.getElementById(id).textContent);}
+function cpText(t){
+  if(!t||t==='-') return;
+  navigator.clipboard.writeText(t).catch(()=>{const el=document.createElement('textarea');el.value=t;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);});
+  toast(T.copied);
 }
+let toastTimer = null;
+function toast(msg){
+  const t=document.getElementById('toast');
+  if(toastTimer) clearTimeout(toastTimer);
+  t.textContent=msg;
+  t.classList.add('show');
+  toastTimer=setTimeout(()=>{t.classList.remove('show');toastTimer=null;},2000);
+}
+function hideToast(){
+  const t=document.getElementById('toast');
+  if(toastTimer){clearTimeout(toastTimer);toastTimer=null;}
+  t.classList.remove('show');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+(function init(){
+  // Explicitly hide all pages on start
+  document.querySelectorAll('.page').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+  });
+  // Show only home
+  const home = document.getElementById('page-home');
+  if(home){ home.classList.add('active'); home.style.display = 'block'; }
+  document.querySelectorAll('.bnav')[0].classList.add('active');
+
+  // Theme
+  const savedTheme=localStorage.getItem('sk_theme')||'';
+  document.body.className=savedTheme;
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+  const themeMap={'':0,'theme-dark':1,'theme-blue':2,'theme-purple':3,'theme-green':4,'theme-red':5};
+  const idx=themeMap[savedTheme]??0;
+  const btns=document.querySelectorAll('.theme-btn');
+  if(btns[idx]) btns[idx].classList.add('active');
+  // Lang
+  const savedLang=localStorage.getItem('sk_lang')||'uz';
+  lang=savedLang; T=LANGS[lang];
+  document.querySelectorAll('.lang-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['uz','ru','en'][i]===lang);
+  });
+  applyLang();
+  genPW();
+  updateCipherDesc();
+  setCM('gamma', document.querySelector('#page-cipher .pill'));
+})();
 </script>
 </body>
 </html>
